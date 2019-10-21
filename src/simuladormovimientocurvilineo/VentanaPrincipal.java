@@ -182,6 +182,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int x = Integer.parseInt(txtXpos.getText());
         int y = Integer.parseInt(txtYPos.getText());
         planoCartesiano1.setObjectPosition(x, y);
+        System.out.println("asdad");
     }//GEN-LAST:event_btnCambiarPosicionActionPerformed
 
     private void txtYPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYPosActionPerformed
