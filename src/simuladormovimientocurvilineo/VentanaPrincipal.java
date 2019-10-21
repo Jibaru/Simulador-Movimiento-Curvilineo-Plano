@@ -22,7 +22,7 @@ public class VentanaPrincipal extends JFrame{
      */
     public static void main(String[] args) {
         VentanaPrincipal principal = new VentanaPrincipal(800, 600);
-        System.out.print("cambio prueba");
+        // comentario prueba
     }
     
 }
