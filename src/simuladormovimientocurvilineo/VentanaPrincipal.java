@@ -221,6 +221,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 new VentanaPrincipal().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
