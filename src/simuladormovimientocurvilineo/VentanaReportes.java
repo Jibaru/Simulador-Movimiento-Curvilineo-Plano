@@ -5,6 +5,8 @@
  */
 package simuladormovimientocurvilineo;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author USUARIO1
@@ -16,6 +18,7 @@ public class VentanaReportes extends javax.swing.JFrame {
      */
     public VentanaReportes() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     /**
