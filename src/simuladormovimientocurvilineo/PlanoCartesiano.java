@@ -40,7 +40,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     @Override
     public void run() {
         try{
-            while(true){
+            /*while(true){
                 while(x<getWidth()-30){
                 Thread.sleep(50);
                 x+=10;
@@ -51,6 +51,12 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                     x-=10;
                     repaint();
                 }
+            }*/
+            for( int i = 0; i <= 500; i ++ ){
+                Thread.sleep(100);
+                setObjectPosition(2*i,0);
+                VentanaPrincipal.labelPosicion.setText(Integer.toString(this.xPos));
+                repaint();
             }
         }catch(Exception e){
             System.out.println("Ocurrió un error:"+e.getMessage());
