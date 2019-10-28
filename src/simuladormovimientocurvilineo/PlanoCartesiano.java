@@ -8,6 +8,12 @@ package simuladormovimientocurvilineo;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,27 +24,33 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     int x=getWidth()/2;
     private int xPos = 0;
     private int yPos = 0;
-    Dimension sizeObject;
-    Thread hilo;
+    private Dimension sizeObject;
+    private Image background;
+    protected Thread hilo = new Thread(this);
+    private boolean isRunning = false;
     /**
      * Creates new form PlanoCartesiano
      */
     public PlanoCartesiano() {
         initComponents();
-        hilo = new Thread(this);
         sizeObject = new Dimension(30,30);
+        background = new ImageIcon("src/assets/img/fondo1.jpg").getImage();
     }
     
     @Override
     public void paint(Graphics g){
-        g.setColor(getBackground());
+        System.out.println(this.getWidth());
+        System.out.println(this.getHeight());
+        g.setColor(Color.green);
         g.fillRect(0, 0, getWidth(), getHeight());
+        g.drawImage(background, 0, 0, null);
         g.setColor(Color.red);
         g.fillOval(xPos, yPos,sizeObject.width,sizeObject.height);
     }
     
     @Override
     public void run() {
+        isRunning = true;
         try{
             /*while(true){
                 while(x<getWidth()-30){
@@ -52,7 +64,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                     repaint();
                 }
             }*/
-            for( int i = 0; i <= 500; i ++ ){
+            for( int i = 0; i <= 500 && isRunning; i ++ ){
                 Thread.sleep(100);
                 setObjectPosition(2*i,0);
                 VentanaPrincipal.labelPosicion.setText(Integer.toString(this.xPos));
@@ -61,6 +73,11 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         }catch(Exception e){
             System.out.println("Ocurrió un error:"+e.getMessage());
         }
+    }
+    
+    public void restart(){
+        hilo = new Thread(this);
+        hilo.start();
     }
     
     public void start(){
@@ -75,10 +92,21 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         hilo.resume();
     }
     
+    public void stop(){
+        isRunning = false;
+    }
+    
     public void setObjectPosition( int x, int y ){
         this.xPos = x;
         this.yPos = getHeight() - (y+sizeObject.height);
         this.repaint();
+    }
+    
+    public void setImageBackground( String path ){
+        if( path != null ){
+            this.background = new ImageIcon(path).getImage();
+            repaint();
+        }
     }
     
     /**
@@ -96,16 +124,18 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("PlanoCartesiano"));
+        setMaximumSize(new java.awt.Dimension(670, 240));
+        setPreferredSize(new java.awt.Dimension(670, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
