@@ -16,6 +16,8 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaConfiguracion
      */
+    private boolean ocultarPosicion = false;
+    
     public VentanaConfiguracion() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -50,7 +52,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        Mostrar = new javax.swing.JComboBox<>();
+        posicionSelect = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -81,6 +83,11 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -117,14 +124,14 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel3.setText("ECUACIONES:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setLabelFor(Mostrar);
+        jLabel11.setLabelFor(posicionSelect);
         jLabel11.setText("OPCIONES");
         jLabel11.setPreferredSize(new java.awt.Dimension(52, 50));
 
-        Mostrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", " " }));
-        Mostrar.addActionListener(new java.awt.event.ActionListener() {
+        posicionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        posicionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarActionPerformed(evt);
+                posicionSelectActionPerformed(evt);
             }
         });
 
@@ -140,13 +147,13 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Aceleracion:");
+        jLabel8.setText("Posicion X");
 
-        jLabel12.setText("Velocidad:");
+        jLabel12.setText("Velocidad");
 
-        jLabel13.setText("Altura: ");
+        jLabel13.setText("Aceleracion");
 
-        jLabel14.setText("Distancia:");
+        jLabel14.setText("Tiempo:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR" }));
 
@@ -204,7 +211,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(119, 119, 119)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +223,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posicionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,7 +241,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posicionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -302,9 +309,18 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MostrarActionPerformed
+    private void posicionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicionSelectActionPerformed
+        int id = posicionSelect.getSelectedIndex();
+        if(id == 0){
+            ocultarPosicion = true;
+        }
+    }//GEN-LAST:event_posicionSelectActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(ocultarPosicion == true){
+            VentanaPrincipal.labelPosicionX.setVisible(false);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,7 +358,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Mostrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -376,5 +391,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JComboBox<String> posicionSelect;
     // End of variables declaration//GEN-END:variables
 }

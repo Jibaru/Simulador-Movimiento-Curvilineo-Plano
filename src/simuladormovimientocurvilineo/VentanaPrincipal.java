@@ -54,7 +54,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         comboEstilos = new javax.swing.JComboBox();
         btnPausar = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        labelPosicionX = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -220,8 +220,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 180, -1));
 
-        jLabel11.setText("jLabel11");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 50, 20));
+        labelPosicionX.setText("Posicion X");
+        getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 50, 20));
 
         jLabel12.setText("jLabel12");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, -1, 20));
@@ -400,7 +400,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -427,6 +426,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     public static javax.swing.JLabel labelPosicion;
+    public static javax.swing.JLabel labelPosicionX;
     private simuladormovimientocurvilineo.PlanoCartesiano planoCartesiano1;
     private javax.swing.JTextField txtXpos;
     private javax.swing.JTextField txtYPos;
