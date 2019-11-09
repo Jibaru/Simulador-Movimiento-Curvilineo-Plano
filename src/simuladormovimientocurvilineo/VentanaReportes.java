@@ -13,6 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+
 /**
  *
  * @author USUARIO1
@@ -45,17 +46,17 @@ public class VentanaReportes extends javax.swing.JFrame {
         return coleccionDeDatos;
     }
     
-    private void crearSeries(HashMap<Double, Double> map){
+    public void crearSeries(HashMap<Double, Double> map){
         map.entrySet().forEach((item) -> {
             valoresGrafica.addOrUpdate(item.getKey(),item.getValue());
         });
     }
     
-    public VentanaReportes() {
+    public VentanaReportes(){
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        HashMap<Double, Double> datos = new HashMap<>();
+        HashMap<Double, Double> datos = new HashMap<Double,Double>();
         chartPanel = crearChart(datos);
         chartPanel.setSize(600,400);
         chartPanel.setVisible(true);
@@ -161,7 +162,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("RELACIÓN VELOCIDAD VS TIEMPO");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Velocidad Máx VS Aceleración Máx", "Velocidad Máx VS Distancia Máx", "Velocidad Máx VS Altura Máx", "Aceleración Máx VS Distancia Máx", "Aceleración Máx VS Altura Máx", "Distancia Máx VS Altura Máx", " ", " ", " " }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -213,8 +214,8 @@ public class VentanaReportes extends javax.swing.JFrame {
                                         .addComponent(txtReportesAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(20, 20, 20)
                         .addComponent(jLabel10)
-                        .addGap(122, 122, 122)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(860, 860, 860)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -274,15 +275,55 @@ public class VentanaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
- 
-        HashMap<Double, Double> datos = new HashMap<>();
-        datos.put(0.0,0.0);
-        datos.put(1.0,1.0);
-        datos.put(2.0,4.0);
-        datos.put(3.0,9.0);
-        datos.put(4.0,16.0);
+        int ind = jComboBox1.getSelectedIndex();
+        HashMap<Double, Double> datos = new HashMap<Double,Double>();      
         valoresGrafica.clear();
-        crearSeries(datos);
+        switch(ind){
+            case 0://VELOCIDAD MAX VS ACELERACION MAX
+               datos.put(0.0,0.0);
+               datos.put(1.0,1.0);
+               datos.put(2.0,4.0);
+               datos.put(3.0,1.0);
+               datos.put(4.0,6.0);                                   
+               break;
+            case 1://VELOCIDAD MAX VS DISTANCIA MAX
+               datos.put(5.0,5.0);
+               datos.put(6.0,2.0);
+               datos.put(7.0,1.0);
+               datos.put(8.0,8.0);
+               datos.put(9.0,3.0);  
+               break;
+            case 2://VELOCIDAD MAX VS ALTURA MAX
+               datos.put(10.0,1.0);
+               datos.put(11.0,24.0);
+               datos.put(12.0,43.0);
+               datos.put(13.0,28.0);
+               datos.put(14.0,15.0); 
+               break;
+            case 3://ACELERACION MAX VS DISTANCIA MAX
+               datos.put(0.0,9.0);
+               datos.put(1.0,4.0);
+               datos.put(2.0,7.0);
+               datos.put(3.0,3.0);
+               datos.put(4.0,8.0);                                   
+               break;
+            case 4://ACELERACION MAX VS ALTURA MAX
+               datos.put(5.0,4.0);
+               datos.put(6.0,8.0);
+               datos.put(7.0,1.0);
+               datos.put(8.0,0.0);
+               datos.put(9.0,9.0);  
+               break;
+            case 5://DISTANCIA MAX VS ALTURA MAX
+               datos.put(10.0,3.0);
+               datos.put(11.0,8.0);
+               datos.put(12.0,4.0);
+               datos.put(13.0,2.0);
+               datos.put(14.0,9.0); 
+               break;
+        }
+         crearSeries(datos);
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
