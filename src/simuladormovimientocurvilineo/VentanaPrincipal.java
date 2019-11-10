@@ -30,15 +30,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         planoCartesiano1 = new simuladormovimientocurvilineo.PlanoCartesiano();
         btnIniciar = new javax.swing.JButton();
-        txtXpos = new javax.swing.JTextField();
-        txtYPos = new javax.swing.JTextField();
-        btnCambiarPosicion = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -55,23 +49,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnPausar = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
         labelPosicionX = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        LabelVelocidad = new javax.swing.JLabel();
+        LabelTiempo = new javax.swing.JLabel();
+        txtfPosX = new javax.swing.JTextField();
+        txtfVel = new javax.swing.JTextField();
+        txtfTiempo = new javax.swing.JTextField();
+        LabelPosiciónY = new javax.swing.JLabel();
+        LabelAceleración = new javax.swing.JLabel();
+        txtfPosY = new javax.swing.JTextField();
+        txtfAcel = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         labelPosicion = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,39 +87,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 380, 180, -1));
 
-        txtXpos.setText("0");
-        txtXpos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXposActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtXpos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 42, -1));
-
-        txtYPos.setText("0");
-        txtYPos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYPosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtYPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 43, -1));
-
-        btnCambiarPosicion.setText("Cambiar");
-        btnCambiarPosicion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiarPosicionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCambiarPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
-
-        jLabel1.setText("Posicion Inicial");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 80, -1));
-
-        jLabel2.setText("X:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 20));
-
-        jLabel3.setText("Y:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 17));
-
         jLabel4.setText("(0,0)");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 328, -1, -1));
 
@@ -137,7 +95,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setText("<html><b>SIMULADOR MOVIMIENTO CURVILÍNEO PLANO</b></html>");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 22, 987, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 43, 120, -1));
 
         jLabel6.setText("Velocidad inicial");
@@ -221,45 +179,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 180, -1));
 
         labelPosicionX.setText("Posicion X");
-        getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 50, 20));
+        getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 50, 20));
 
-        jLabel12.setText("jLabel12");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, -1, 20));
+        LabelVelocidad.setText("Velocidad");
+        getContentPane().add(LabelVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, 20));
 
-        jLabel13.setText("jLabel13");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, 20));
+        LabelTiempo.setText("Tiempo");
+        getContentPane().add(LabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, 20));
 
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 60, 20));
-
-        jTextField6.setText("jTextField6");
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, 20));
-
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, 20));
-
-        jLabel14.setText("jLabel14");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, -1, 20));
-
-        jLabel15.setText("jLabel15");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, 20));
-
-        jLabel16.setText("jLabel16");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, -1, 20));
-
-        jTextField8.setText("jTextField8");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtfPosX.setText("jTextField5");
+        txtfPosX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtfPosXActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, 20));
+        getContentPane().add(txtfPosX, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 60, 20));
 
-        jTextField9.setText("jTextField9");
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, -1, 20));
+        txtfVel.setText("jTextField6");
+        getContentPane().add(txtfVel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, 20));
 
-        jTextField10.setText("jTextField10");
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, -1, 20));
+        txtfTiempo.setText("jTextField7");
+        getContentPane().add(txtfTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, 20));
+
+        LabelPosiciónY.setText("Posición Y");
+        getContentPane().add(LabelPosiciónY, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, 20));
+
+        LabelAceleración.setText("Aceleración");
+        getContentPane().add(LabelAceleración, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, 20));
+
+        txtfPosY.setText("jTextField8");
+        txtfPosY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfPosYActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtfPosY, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, 20));
+
+        txtfAcel.setText("jTextField9");
+        txtfAcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfAcelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtfAcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, -1, 20));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("DATOS INICIALES");
@@ -273,23 +235,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setBounds(0, 0, 1040, 639);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtXposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXposActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtXposActionPerformed
-
-    /**
-    * @author Jibaru
-    */
-    private void btnCambiarPosicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPosicionActionPerformed
-        int x = Integer.parseInt(txtXpos.getText());
-        int y = Integer.parseInt(txtYPos.getText());
-        planoCartesiano1.setObjectPosition(x, y);
-    }//GEN-LAST:event_btnCambiarPosicionActionPerformed
-
-    private void txtYPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYPosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtYPosActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         planoCartesiano1.restart();
@@ -310,9 +255,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaConfiguracion.setVisible(true);
     }//GEN-LAST:event_btnConfiguracionActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtfPosYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfPosYActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtfPosYActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -352,6 +297,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnIniciar.setEnabled(true);
     }//GEN-LAST:event_btnTerminarActionPerformed
 
+    private void txtfPosXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfPosXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfPosXActionPerformed
+
+    private void txtfAcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfAcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfAcelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -389,7 +342,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     private boolean isSuspended = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCambiarPosicion;
+    private javax.swing.JLabel LabelAceleración;
+    private javax.swing.JLabel LabelPosiciónY;
+    private javax.swing.JLabel LabelTiempo;
+    private javax.swing.JLabel LabelVelocidad;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnPausar;
@@ -398,17 +354,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox comboEstilos;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -416,19 +364,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     public static javax.swing.JLabel labelPosicion;
     public static javax.swing.JLabel labelPosicionX;
     private simuladormovimientocurvilineo.PlanoCartesiano planoCartesiano1;
-    private javax.swing.JTextField txtXpos;
-    private javax.swing.JTextField txtYPos;
+    public static javax.swing.JTextField txtfAcel;
+    public static javax.swing.JTextField txtfPosX;
+    public static javax.swing.JTextField txtfPosY;
+    public static javax.swing.JTextField txtfTiempo;
+    public static javax.swing.JTextField txtfVel;
     // End of variables declaration//GEN-END:variables
 }
