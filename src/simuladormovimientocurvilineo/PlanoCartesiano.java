@@ -9,10 +9,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -67,7 +63,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
             for( int i = 0; i <= 500 && isRunning; i ++ ){
                 Thread.sleep(100);
                 setObjectPosition(2*i,0);
-                VentanaPrincipal.labelPosicion.setText(Integer.toString(this.xPos));
+                VentanaPrincipal.txtfTiempo.setText(Integer.toString(this.xPos));
                 repaint();
             }
         }catch(Exception e){

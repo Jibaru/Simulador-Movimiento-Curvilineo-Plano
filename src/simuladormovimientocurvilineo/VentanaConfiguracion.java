@@ -17,6 +17,12 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
      * Creates new form VentanaConfiguracion
      */
     private boolean ocultarPosicion = false;
+    private boolean ocultacele = false;
+    private boolean ocultaveloc = false;
+    private boolean ocultime = false;
+    private boolean mostrarpos=false;
+    
+    
     
     public VentanaConfiguracion() {
         initComponents();
@@ -155,11 +161,26 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
         jLabel14.setText("Tiempo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTAR" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTAR", "NO MOSTRAR" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,6 +320,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -311,16 +333,80 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
     private void posicionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicionSelectActionPerformed
         int id = posicionSelect.getSelectedIndex();
-        if(id == 0){
+        if(id == 1){
             ocultarPosicion = true;
+        }
+        else{
+            ocultarPosicion=false;
         }
     }//GEN-LAST:event_posicionSelectActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
         if(ocultarPosicion == true){
             VentanaPrincipal.labelPosicionX.setVisible(false);
+            VentanaPrincipal.txtfPosX.setVisible(false);
         }
+        else{
+            VentanaPrincipal.labelPosicionX.setVisible(true);
+            VentanaPrincipal.txtfPosX.setVisible(true);   
+        }
+        if(ocultaveloc == true){
+            VentanaPrincipal.LabelVelocidad.setVisible(false);
+            VentanaPrincipal.txtfVel.setVisible(false);
+        }
+        else{
+            VentanaPrincipal.LabelVelocidad.setVisible(true);
+            VentanaPrincipal.txtfVel.setVisible(true);   
+        }
+        if(ocultacele == true){
+            VentanaPrincipal.LabelAceleración.setVisible(false);
+            VentanaPrincipal.txtfAcel.setVisible(false);
+        }
+        else{
+            VentanaPrincipal.LabelAceleración.setVisible(true);
+            VentanaPrincipal.txtfAcel.setVisible(true);   
+        }
+        if(ocultime == true){
+            VentanaPrincipal.LabelTiempo.setVisible(false);
+            VentanaPrincipal.txtfTiempo.setVisible(false);
+        }
+        else{
+            VentanaPrincipal.LabelTiempo.setVisible(true);
+            VentanaPrincipal.txtfTiempo.setVisible(true);   
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+         int id = jComboBox1.getSelectedIndex();
+        if(id == 1){
+            ocultaveloc = true;
+        }else{
+            ocultaveloc = false;
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+         int id = jComboBox2.getSelectedIndex();
+        if(id == 1){
+            ocultacele = true;
+        }else{
+            ocultacele=false;
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here
+        int id = jComboBox3.getSelectedIndex();
+        if(id == 1){
+            ocultime = true;
+        }else{
+            ocultime=false;
+        }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
