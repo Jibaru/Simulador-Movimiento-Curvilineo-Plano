@@ -16,7 +16,7 @@ public class Binomio {
     private final int exp;
     private final double coef;
     
-    Binomio ( double coef,int exp ){
+    public Binomio ( double coef,int exp ){
         this.coef = coef;
         this.exp = exp;
     }
@@ -24,12 +24,21 @@ public class Binomio {
     public double setX(double x){
         this.x = x;
         return x;
-}
+    }
+    
     public double getX(){
         return this.x;
     }
-    public double getBinomio(){
+    public double getValor( double x ){
         return coef*pow(x, exp);
+    }
+    
+    public double getValor(){
+        return this.coef*pow(this.x, this.exp);
+    }
+    
+    public Binomio getDerivada(){
+        return new Binomio(this.coef*this.exp, this.exp - 1 );
     }
 }
 

@@ -63,6 +63,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtEcuacionAceleracion = new javax.swing.JTextField();
         btnIniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnCambiarPosInicial = new javax.swing.JToggleButton();
+        txtPosInicialX = new javax.swing.JTextField();
+        txtPosInicialY = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -240,6 +244,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Plano Cartesiano");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Posición Inicial");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 90, -1));
+
+        btnCambiarPosInicial.setText("Cambiar");
+        btnCambiarPosInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarPosInicialActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCambiarPosInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, 90, -1));
+
+        txtPosInicialX.setText("0");
+        getContentPane().add(txtPosInicialX, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, 40, -1));
+
+        txtPosInicialY.setText("0");
+        getContentPane().add(txtPosInicialY, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 40, -1));
+
         setSize(new java.awt.Dimension(1040, 589));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -313,6 +335,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnPausar.setEnabled(true);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
+    private void btnCambiarPosInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPosInicialActionPerformed
+ 
+        int x = Integer.parseInt(this.txtPosInicialX.getText());
+        int y = Integer.parseInt(this.txtPosInicialY.getText());
+        
+        planoCartesiano1.setObjectPosition(x, y);
+    }//GEN-LAST:event_btnCambiarPosInicialActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,6 +384,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JLabel LabelPosiciónY;
     public static javax.swing.JLabel LabelTiempo;
     public static javax.swing.JLabel LabelVelocidad;
+    private javax.swing.JToggleButton btnCambiarPosInicial;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnPausar;
@@ -365,6 +396,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel labelEcuacionAceleracion;
@@ -380,6 +412,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtEcuacionVelocidad;
     private javax.swing.JTextField txtEcuacionX;
     private javax.swing.JTextField txtEcuacionY;
+    private javax.swing.JTextField txtPosInicialX;
+    private javax.swing.JTextField txtPosInicialY;
     public static javax.swing.JTextField txtfAcel;
     public static javax.swing.JTextField txtfPosX;
     public static javax.swing.JTextField txtfPosY;

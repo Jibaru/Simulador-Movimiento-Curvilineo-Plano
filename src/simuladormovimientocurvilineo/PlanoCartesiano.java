@@ -5,6 +5,7 @@
  */
 package simuladormovimientocurvilineo;
 
+import ecuaciones.Binomio;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -35,8 +36,6 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     
     @Override
     public void paint(Graphics g){
-        System.out.println(this.getWidth());
-        System.out.println(this.getHeight());
         g.setColor(Color.green);
         g.fillRect(0, 0, getWidth(), getHeight());
         g.drawImage(background, 0, 0, null);
@@ -62,8 +61,22 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
             }*/
             for( int i = 0; i <= 500 && isRunning; i ++ ){
                 Thread.sleep(100);
-                setObjectPosition(2*i,0);
-                VentanaPrincipal.txtfTiempo.setText(Integer.toString(this.xPos));
+                
+                Binomio[] binomios = new Binomio[2];
+                binomios[0] = new Binomio(20,1);
+                binomios[1] = new Binomio(-20,3);
+                
+                double _x = 2*Math.cos(0.785398)*i;
+                
+                double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
+                
+                System.out.print(_x);
+                System.out.print(",");
+                System.out.println(_y);
+                setObjectPosition((int)_x,(int)_y);
+                VentanaPrincipal.txtfTiempo.setText(Integer.toString(i));
+                VentanaPrincipal.txtfPosX.setText(Double.toString(_x));
+                VentanaPrincipal.txtfPosY.setText(Double.toString(_y));
                 repaint();
             }
         }catch(Exception e){
