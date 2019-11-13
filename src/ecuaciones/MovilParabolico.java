@@ -8,11 +8,13 @@ import static java.lang.Math.tan;
 
 public class MovilParabolico {
     
-    final double gravedad = 9.8; 
-    double Vx, Vy;
-    double Dx, Hy, Dmax, Hmax;
-    double tiempo, tVuelo,tHmax;
-    double tray;
+    private final double gravedad = 9.8; 
+    private double Vx, Vy;
+    private double Dx, Hy, Dmax, Hmax;
+    private double tiempo, tVuelo,tHmax;
+    private double tray;
+    private double angulo;
+    private double vInicial;
 
     public void Velocidades( double ang, double vIni){ 
         Vx = vIni*cos(ang*PI/180);
@@ -25,8 +27,20 @@ public class MovilParabolico {
     }
     
     public double velY(double ang, double vIni){
-        Vy = vIni*cos(ang*PI/180);
+        Vy = vIni*sin(ang*PI/180);
         return Vy;
+    }
+    
+    public void setVelIni(double v){
+        this.vInicial = v;
+    }
+    
+    public void setAngulo( double theta ){
+        this.angulo = theta;
+    }
+    
+    public double getAngulo(){
+        return this.angulo;
     }
 
     public void Distancias(double ang, double vIni, double tiempo){
@@ -76,5 +90,13 @@ public class MovilParabolico {
         double x = vIni*cos(ang*PI/180)*tiempo;
         tray = x*tan(ang*PI/180)-0.5*gravedad*pow(x/(vIni*cos(ang*PI/180)), 2);
         return tray;
+    }
+    
+    public String trayectoria(float vIni, float ang ){
+        return "x*tan(" + ang + ")-0.5*(x/("+vIni+"*cos("+ang+")))^2";
+    }
+    
+    public String trayectoria(){
+        return "x*tan(" + (float)angulo+ ")-0.5*(x/("+(float)vInicial+"*cos("+(float)angulo+")))^2";
     }
 }

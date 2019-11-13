@@ -5,8 +5,6 @@
  */
 package simuladormovimientocurvilineo;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author usuario
@@ -20,13 +18,18 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private boolean ocultacele = false;
     private boolean ocultaveloc = false;
     private boolean ocultime = false;
-    private boolean mostrarpos=false;
-    
-    
+    private boolean ocultBtnReporte = false;
     
     public VentanaConfiguracion() {
         initComponents();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.ocultarPosicion = VentanaPrincipal.txtfPosX.isVisible();
+        this.ocultacele      = VentanaPrincipal.txtfAcel.isVisible();
+        this.ocultaveloc     = VentanaPrincipal.txtfVel.isVisible();
+        this.ocultime        = VentanaPrincipal.txtfTiempo.isVisible();
+        this.ocultBtnReporte = VentanaPrincipal.btnReportes.isVisible();
+        
+        this.cambiarEstadoCombos();
+      
     }
 
     /**
@@ -41,37 +44,32 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         posicionSelect = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        labelPosicion = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        velocidadSelect = new javax.swing.JComboBox<>();
+        aceleracionSelect = new javax.swing.JComboBox<>();
+        tiempoSelect = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        reporteSelect = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,7 +84,8 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,232 +93,131 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
 
-        jButton2.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, -1, -1));
 
         jButton3.setText("Calcular");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
 
         jButton4.setText("Calcular");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
 
-        jButton5.setText("Calcular");
+        jButton5.setText("Ok");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 70, -1));
 
-        jButton6.setText("Calcular");
-
-        jButton7.setText("Calcular");
-
-        jButton8.setText("Calcular");
+        jButton6.setText("Ok");
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 70, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("DATOS CONSIDERABLES:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 204, 160, 20));
 
         jLabel2.setText("Ecuacion de velocidad:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
 
         jLabel4.setText("Ecuacion de posicion:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 58, 140, 30));
 
         jLabel5.setText("Ecuacion de la aceleracion:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 30));
 
-        jLabel6.setText("Masa de cuerpo:");
-
-        jLabel7.setText("Acleracion de la ");
-
-        jLabel9.setText("gravedad:");
-
-        jLabel10.setText("aAccion del viento:");
+        jLabel7.setText("Aceleración gravedad:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("ECUACIONES:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 23, 84, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setLabelFor(posicionSelect);
-        jLabel11.setText("OPCIONES");
+        jLabel11.setText("OPCIONES:");
         jLabel11.setPreferredSize(new java.awt.Dimension(52, 50));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 80, 20));
 
-        posicionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        posicionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
         posicionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 posicionSelectActionPerformed(evt);
             }
         });
+        getContentPane().add(posicionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 61, 110, -1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 120, 30));
 
+        jTextField2.setEnabled(false);
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 120, 30));
 
-        jLabel8.setText("Posicion X");
+        jTextField3.setEnabled(false);
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 120, 30));
+
+        jTextField5.setText("9.8");
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 240, 120, -1));
+
+        labelPosicion.setText("Posición");
+        getContentPane().add(labelPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 70, 20));
 
         jLabel12.setText("Velocidad");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 109, 70, 20));
 
-        jLabel13.setText("Aceleracion");
+        jLabel13.setText("Aceleración");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 151, 70, 20));
 
-        jLabel14.setText("Tiempo:");
+        jLabel14.setText("Tiempo");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 199, 70, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        velocidadSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
+        velocidadSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                velocidadSelectActionPerformed(evt);
             }
         });
+        getContentPane().add(velocidadSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 106, 110, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTAR", "NO MOSTRAR" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        aceleracionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
+        aceleracionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                aceleracionSelectActionPerformed(evt);
             }
         });
+        getContentPane().add(aceleracionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 148, 110, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "NO MOSTRAR" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        tiempoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
+        tiempoSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                tiempoSelectActionPerformed(evt);
             }
         });
+        getContentPane().add(tiempoSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 196, 110, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGap(37, 37, 37)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                                        .addComponent(jTextField5)
-                                                        .addComponent(jTextField4)
-                                                        .addComponent(jTextField3)))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton8)
-                                    .addComponent(jButton6)
-                                    .addComponent(jButton7))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(posicionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(posicionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4)
-                            .addComponent(jLabel12)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jLabel13)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7))
-                        .addGap(1, 1, 1)))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
-        );
+        jLabel6.setText("Reportes");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 70, 20));
 
-        pack();
+        reporteSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HABILITAR", "INHABILITAR" }));
+        reporteSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteSelectActionPerformed(evt);
+            }
+        });
+        getContentPane().add(reporteSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 110, -1));
+
+        setSize(new java.awt.Dimension(666, 439));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -333,12 +231,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
     private void posicionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicionSelectActionPerformed
         int id = posicionSelect.getSelectedIndex();
-        if(id == 1){
-            ocultarPosicion = true;
-        }
-        else{
-            ocultarPosicion=false;
-        }
+        ocultarPosicion = id == 1;
     }//GEN-LAST:event_posicionSelectActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -346,10 +239,14 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         if(ocultarPosicion == true){
             VentanaPrincipal.labelPosicionX.setVisible(false);
             VentanaPrincipal.txtfPosX.setVisible(false);
+            VentanaPrincipal.labelPosicionY.setVisible(false);
+            VentanaPrincipal.txtfPosY.setVisible(false);
         }
         else{
             VentanaPrincipal.labelPosicionX.setVisible(true);
-            VentanaPrincipal.txtfPosX.setVisible(true);   
+            VentanaPrincipal.txtfPosX.setVisible(true);
+            VentanaPrincipal.labelPosicionY.setVisible(true);
+            VentanaPrincipal.txtfPosY.setVisible(true);
         }
         if(ocultaveloc == true){
             VentanaPrincipal.LabelVelocidad.setVisible(false);
@@ -375,39 +272,67 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
             VentanaPrincipal.LabelTiempo.setVisible(true);
             VentanaPrincipal.txtfTiempo.setVisible(true);   
         }
+        if(ocultBtnReporte){
+            VentanaPrincipal.btnReportes.setVisible(false);
+        }else{
+            VentanaPrincipal.btnReportes.setVisible(true);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void velocidadSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_velocidadSelectActionPerformed
         // TODO add your handling code here:
-         int id = jComboBox1.getSelectedIndex();
+         int id = velocidadSelect.getSelectedIndex();
         if(id == 1){
             ocultaveloc = true;
         }else{
             ocultaveloc = false;
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_velocidadSelectActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void aceleracionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceleracionSelectActionPerformed
         // TODO add your handling code here:
-         int id = jComboBox2.getSelectedIndex();
+         int id = aceleracionSelect.getSelectedIndex();
         if(id == 1){
             ocultacele = true;
         }else{
             ocultacele=false;
         }
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_aceleracionSelectActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void tiempoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoSelectActionPerformed
         // TODO add your handling code here
-        int id = jComboBox3.getSelectedIndex();
-        if(id == 1){
-            ocultime = true;
-        }else{
-            ocultime=false;
-        }
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+        int id = tiempoSelect.getSelectedIndex();
+        ocultime = id == 1;
+    }//GEN-LAST:event_tiempoSelectActionPerformed
 
+    private void reporteSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteSelectActionPerformed
+        int id = reporteSelect.getSelectedIndex();
+        ocultBtnReporte = id == 1;
+    }//GEN-LAST:event_reporteSelectActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+    
+    private void cambiarEstadoCombos(){
+        if(ocultarPosicion)posicionSelect.setSelectedIndex(0);
+        else posicionSelect.setSelectedIndex(1);
+        
+        if(ocultacele)aceleracionSelect.setSelectedIndex(0);
+        else aceleracionSelect.setSelectedIndex(1);
+        
+        if(ocultaveloc)velocidadSelect.setSelectedIndex(0);
+        else velocidadSelect.setSelectedIndex(1);
+        
+        if(ocultime) tiempoSelect.setSelectedIndex(0);
+        else tiempoSelect.setSelectedIndex(1);
+        
+        if(ocultBtnReporte)reporteSelect.setSelectedIndex(0);
+        else reporteSelect.setSelectedIndex(1);
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -444,19 +369,14 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> aceleracionSelect;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -467,16 +387,16 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel labelPosicion;
     private javax.swing.JComboBox<String> posicionSelect;
+    private javax.swing.JComboBox<String> reporteSelect;
+    private javax.swing.JComboBox<String> tiempoSelect;
+    private javax.swing.JComboBox<String> velocidadSelect;
     // End of variables declaration//GEN-END:variables
 }

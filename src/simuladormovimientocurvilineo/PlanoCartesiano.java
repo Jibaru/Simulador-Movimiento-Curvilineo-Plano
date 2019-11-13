@@ -5,10 +5,12 @@
  */
 package simuladormovimientocurvilineo;
 
-import ecuaciones.Binomio;
+import ecuaciones.Monomio;
+import ecuaciones.Polinomio;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -25,13 +27,19 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     private Image background;
     protected Thread hilo = new Thread(this);
     private boolean isRunning = false;
+    private int escala;
+    private int delay;
+    private double tiempoMax;
+    private Polinomio polinomio;
     /**
      * Creates new form PlanoCartesiano
      */
     public PlanoCartesiano() {
         initComponents();
-        sizeObject = new Dimension(30,30);
+        sizeObject = new Dimension(10,10);
         background = new ImageIcon("src/assets/img/fondo1.jpg").getImage();
+        escala = 45;
+        delay = 30;
     }
     
     @Override
@@ -59,22 +67,25 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                     repaint();
                 }
             }*/
-            for( int i = 0; i <= 500 && isRunning; i ++ ){
-                Thread.sleep(100);
+            for( double i = 0; i <= tiempoMax && isRunning; i +=0.01 ){
+                double porcentaje = i*100/tiempoMax;
                 
-                Binomio[] binomios = new Binomio[2];
-                binomios[0] = new Binomio(20,1);
-                binomios[1] = new Binomio(-20,3);
+                VentanaPrincipal.progressBarSimulacion.setValue((int)porcentaje);
+                Thread.sleep(delay);
                 
-                double _x = 2*Math.cos(0.785398)*i;
+                Monomio[] binomios = new Monomio[2];
+                binomios[0] = new Monomio(3,1);
+                binomios[1] = new Monomio(-2,2);
                 
-                double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
+                double _x = i*Math.cos(Math.PI/6)*22;
+                //double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
+                double _y = polinomio.getY(_x);
                 
                 System.out.print(_x);
                 System.out.print(",");
                 System.out.println(_y);
-                setObjectPosition((int)_x,(int)_y);
-                VentanaPrincipal.txtfTiempo.setText(Integer.toString(i));
+                setObjectPosition(_x,_y);
+                VentanaPrincipal.txtfTiempo.setText(Double.toString(i));
                 VentanaPrincipal.txtfPosX.setText(Double.toString(_x));
                 VentanaPrincipal.txtfPosY.setText(Double.toString(_y));
                 repaint();
@@ -105,9 +116,9 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         isRunning = false;
     }
     
-    public void setObjectPosition( int x, int y ){
-        this.xPos = x;
-        this.yPos = getHeight() - (y+sizeObject.height);
+    public void setObjectPosition( double x, double y ){
+        this.xPos =(int) (x*escala);
+        this.yPos = (int) (getHeight() - (y*escala+sizeObject.height));
         this.repaint();
     }
     
@@ -116,6 +127,22 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
             this.background = new ImageIcon(path).getImage();
             repaint();
         }
+    }
+    
+    public void setEscala(int escala){
+        this.escala = escala;
+    }
+    
+    public void setDelay(int delay){
+        this.delay = delay;
+    }
+    
+    public void setTiempoMax( double tmax ){
+        this.tiempoMax = tmax;
+    }
+    
+    public void setPolinomio(Polinomio p){
+        this.polinomio = p;
     }
     
     /**

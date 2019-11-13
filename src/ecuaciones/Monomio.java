@@ -11,14 +11,22 @@ import static java.lang.Math.pow;
  *
  * @author Georgette
  */
-public class Binomio {
+public class Monomio {
     private double x;
     private final int exp;
     private final double coef;
     
-    public Binomio ( double coef,int exp ){
+    public Monomio ( double coef,int exp ){
         this.coef = coef;
         this.exp = exp;
+    }
+    
+    public Monomio( String binomio ){
+        
+        String[] elementos = binomio.split("[*^]");
+        coef = Double.parseDouble(elementos[0]);
+        exp  = Integer.parseInt(elementos[2]);
+        
     }
     
     public double setX(double x){
@@ -37,8 +45,14 @@ public class Binomio {
         return this.coef*pow(this.x, this.exp);
     }
     
-    public Binomio getDerivada(){
-        return new Binomio(this.coef*this.exp, this.exp - 1 );
+    public Monomio getDerivada(){
+        return new Monomio(this.coef*this.exp, this.exp - 1 );
     }
+    
+    @Override
+    public String toString(){
+        return coef+"*x^"+exp;
+    }
+    
 }
 
