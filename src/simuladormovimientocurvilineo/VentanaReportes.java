@@ -5,7 +5,9 @@
  */
 package simuladormovimientocurvilineo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -23,16 +25,20 @@ public class VentanaReportes extends javax.swing.JFrame {
     
     private final ChartPanel chartPanel;
     private final XYSeries valoresGrafica = new XYSeries("");
+    private final HashMap<String, List<List<Double>>> reportes;
+    private String etiquetaXChart = "";
+    private String etiquetaYChart = "";
+    private String tituloChart = "";
     /**
      * Creates new form VentanaReportes
      */
     
-    private ChartPanel crearChart(HashMap<Double, Double> map){
+    private ChartPanel crearChart(List<List<Double>> lista){
 
-      crearSeries(map);
+      crearSeries(lista);
       XYSeriesCollection col = crearColeccion(valoresGrafica);
       JFreeChart chartGrafica = ChartFactory.createXYLineChart(
-        "Titulo","Etiqueta X","Etiqueta Y",col
+        tituloChart,etiquetaXChart,etiquetaYChart,col
       );
       
       ChartPanel panel = new ChartPanel(chartGrafica);
@@ -46,17 +52,22 @@ public class VentanaReportes extends javax.swing.JFrame {
         return coleccionDeDatos;
     }
     
-    public void crearSeries(HashMap<Double, Double> map){
-        map.entrySet().forEach((item) -> {
-            valoresGrafica.addOrUpdate(item.getKey(),item.getValue());
+    public void crearSeries(List<List<Double>> valores){
+        //map.entrySet().forEach((item) -> {
+        //    valoresGrafica.addOrUpdate(item.getKey(),item.getValue());
+        //});
+        valores.forEach((item)->{
+            valoresGrafica.addOrUpdate(item.get(0), item.get(1));
         });
+        
     }
     
-    public VentanaReportes(){
+    public VentanaReportes(HashMap<String, List<List<Double>>> reportes){
         initComponents();
         
-        HashMap<Double, Double> datos = new HashMap<>();
-        chartPanel = crearChart(datos);
+        this.reportes = reportes;
+        List<List<Double>> listaVacia = new ArrayList<>();
+        chartPanel = crearChart(listaVacia);
         chartPanel.setSize(500,300);
         chartPanel.setVisible(true);
         chartPanel.setLocation(280,60);
@@ -87,6 +98,8 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        etiquetaX = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -145,7 +158,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("RELACIÓN DE DATOS");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Velocidad Máx VS Aceleración Máx", "Velocidad Máx VS Distancia Máx", "Velocidad Máx VS Altura Máx", "Aceleración Máx VS Distancia Máx", "Aceleración Máx VS Altura Máx", "Distancia Máx VS Altura Máx" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Velocidad vs Tiempo", "Aceleración vs Tiempo", "Posición X vs Posición Y" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -158,6 +171,10 @@ public class VentanaReportes extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        etiquetaX.setText("Etiqueta X");
+
+        jLabel3.setText("Etiqueta Y");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,9 +209,17 @@ public class VentanaReportes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(66, 66, 66)
-                                .addComponent(jLabel10)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel10))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(144, 145, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(etiquetaX, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -215,7 +240,9 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtReportesAceleracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtReportesDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,7 +250,9 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtReportesAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(etiquetaX)
+                .addGap(13, 13, 13)
                 .addComponent(jButton2)
                 .addGap(33, 33, 33))
         );
@@ -238,53 +267,30 @@ public class VentanaReportes extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int ind = jComboBox1.getSelectedIndex();
-        HashMap<Double, Double> datos = new HashMap<Double,Double>();      
+        List<List<Double>> lista = new ArrayList<>();
         valoresGrafica.clear();
         switch(ind){
-            case 0://VELOCIDAD MAX VS ACELERACION MAX
-               datos.put(0.0,0.0);
-               datos.put(1.0,1.0);
-               datos.put(2.0,4.0);
-               datos.put(3.0,1.0);
-               datos.put(4.0,6.0);                                   
+            case 0://VELOCIDAD VS TIEMPO
+               lista = reportes.get("velocidad-tiempo");
+               tituloChart = "Velocidad(m/s) vs Tiempo(s)";
+               etiquetaXChart = "Velocidad";
+               etiquetaYChart = "Tiempo";
                break;
-            case 1://VELOCIDAD MAX VS DISTANCIA MAX
-               datos.put(5.0,5.0);
-               datos.put(6.0,2.0);
-               datos.put(7.0,1.0);
-               datos.put(8.0,8.0);
-               datos.put(9.0,3.0);  
+            case 1://ACELERACION VS TIEMPO
+               lista = reportes.get("aceleracion-tiempo"); 
+               tituloChart = "Aceleración(m/s^2) vs Tiempo(s)";
+               etiquetaXChart = "Aceleración";
+               etiquetaYChart = "Tiempo";
                break;
-            case 2://VELOCIDAD MAX VS ALTURA MAX
-               datos.put(10.0,1.0);
-               datos.put(11.0,24.0);
-               datos.put(12.0,43.0);
-               datos.put(13.0,28.0);
-               datos.put(14.0,15.0); 
-               break;
-            case 3://ACELERACION MAX VS DISTANCIA MAX
-               datos.put(0.0,9.0);
-               datos.put(1.0,4.0);
-               datos.put(2.0,7.0);
-               datos.put(3.0,3.0);
-               datos.put(4.0,8.0);                                   
-               break;
-            case 4://ACELERACION MAX VS ALTURA MAX
-               datos.put(5.0,4.0);
-               datos.put(6.0,8.0);
-               datos.put(7.0,1.0);
-               datos.put(8.0,0.0);
-               datos.put(9.0,9.0);  
-               break;
-            case 5://DISTANCIA MAX VS ALTURA MAX
-               datos.put(10.0,3.0);
-               datos.put(11.0,8.0);
-               datos.put(12.0,4.0);
-               datos.put(13.0,2.0);
-               datos.put(14.0,9.0); 
+            case 2://POSICIÓN X VS POSICIÓN Y
+               lista = reportes.get("x-y");
+               tituloChart = "Posición X(m) vs Posición Y(m)";
+               etiquetaXChart = "Velocidad";
+               etiquetaYChart = "Tiempo";
                break;
         }
-         crearSeries(datos);
+         etiquetaX.setText(etiquetaXChart);
+         crearSeries(lista);
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -324,18 +330,20 @@ public class VentanaReportes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new VentanaReportes().setVisible(true);
-        });
+        //java.awt.EventQueue.invokeLater(() -> {
+        //    new VentanaReportes().setVisible(true);
+        //});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel etiquetaX;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

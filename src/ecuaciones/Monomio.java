@@ -51,6 +51,12 @@ public class Monomio {
     
     @Override
     public String toString(){
+        if( coef == 0.0 ){
+            return "0.0";
+        }
+        if( exp == 0.0 ){
+            return ""+coef;
+        }
         return coef+"*x^"+exp;
     }
     

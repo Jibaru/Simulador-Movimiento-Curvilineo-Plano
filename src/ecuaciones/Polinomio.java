@@ -5,7 +5,8 @@
  */
 package ecuaciones;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,18 +14,18 @@ import com.sun.org.apache.bcel.internal.generic.AALOAD;
  */
 public class Polinomio {
     
-    private final Monomio[] monomios;
+    private final List<Monomio> monomios;
     
     
-    public Polinomio(Monomio[] monomios){
+    public Polinomio(List<Monomio> monomios){
         this.monomios = monomios;
     }
     
     public Polinomio(String polinomio){
-        String[] elementos = polinomio.split("+");
-        monomios = new Monomio[elementos.length];
-        for(int i = 0; i < elementos.length; i++ ){
-            monomios[i] = new Monomio(elementos[i]);
+        String[] elementos = polinomio.split("[+]");
+        monomios = new ArrayList<>();
+        for (String elemento : elementos) {
+            monomios.add(new Monomio(elemento));
         }
     }
     
@@ -40,12 +41,25 @@ public class Polinomio {
     public String toString(){
         String polinomio = "";
         int i = 0;
-        int total = monomios.length;
+        int total = monomios.size();
         for(Monomio m: monomios){
             polinomio += m.toString();
             if(i != total -1 ) polinomio += "+"; 
             i++;
         }
         return polinomio;
+    }
+    
+    public Polinomio getDerivada(){
+        List<Monomio> monomiosDeriv = new ArrayList<>();
+        Polinomio p;
+       
+        monomios.forEach((m) -> {
+            monomiosDeriv.add(m.getDerivada());
+        });
+       
+        p = new Polinomio(monomiosDeriv);
+        
+        return p;
     }
 }

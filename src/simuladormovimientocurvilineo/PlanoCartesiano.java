@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
@@ -54,6 +56,15 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     @Override
     public void run() {
         isRunning = true;
+        Polinomio vel = polinomio.getDerivada();
+        Polinomio acel = vel.getDerivada();
+        
+        List<List<Double>> velocidadtiempo = new ArrayList<>();
+        List<List<Double>> aceleraciontiempo = new ArrayList<>();
+        List<List<Double>> xy = new ArrayList<>();
+        
+        VentanaPrincipal.datosReportes.clear();
+        
         try{
             /*while(true){
                 while(x<getWidth()-30){
@@ -67,27 +78,53 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                     repaint();
                 }
             }*/
-            for( double i = 0; i <= tiempoMax && isRunning; i +=0.01 ){
-                double porcentaje = i*100/tiempoMax;
+            for( double tiempo = 0; tiempo <= tiempoMax && isRunning; tiempo +=0.01 ){
+                double porcentaje = tiempo*100/tiempoMax;
                 
                 VentanaPrincipal.progressBarSimulacion.setValue((int)porcentaje);
                 Thread.sleep(delay);
                 
-                Monomio[] binomios = new Monomio[2];
-                binomios[0] = new Monomio(3,1);
-                binomios[1] = new Monomio(-2,2);
+                //Monomio[] binomios = new Monomio[2];
+                //binomios[0] = new Monomio(3,1);
+                //binomios[1] = new Monomio(-2,2);
                 
-                double _x = i*Math.cos(Math.PI/6)*22;
+                double _x = tiempo*Math.cos(Math.PI/6)*22;
                 //double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
                 double _y = polinomio.getY(_x);
+                double _velocidad = vel.getY(_x);
+                double _aceleracion = acel.getY(_x);
                 
-                System.out.print(_x);
-                System.out.print(",");
-                System.out.println(_y);
+                List<Double> datosVT = new ArrayList<>();
+                datosVT.add(_velocidad);
+                datosVT.add(tiempo);
+                velocidadtiempo.add(datosVT);
+                
+                List<Double> datosAT = new ArrayList<>();
+                datosAT.add(_aceleracion);
+                datosAT.add(tiempo);
+                aceleraciontiempo.add(datosAT);
+                
+                List<Double> datosxy = new ArrayList<>();
+                datosxy.add(_x);
+                datosxy.add(_y);
+                xy.add(datosxy);
+                //System.out.print(_x);
+                //System.out.print(",");
+                //System.out.println(_y);
+                
                 setObjectPosition(_x,_y);
-                VentanaPrincipal.txtfTiempo.setText(Double.toString(i));
+                
+                VentanaPrincipal.txtfTiempo.setText(Double.toString(tiempo));
                 VentanaPrincipal.txtfPosX.setText(Double.toString(_x));
                 VentanaPrincipal.txtfPosY.setText(Double.toString(_y));
+                VentanaPrincipal.txtfVel.setText(Double.toString(_velocidad));
+                VentanaPrincipal.txtfAcel.setText(Double.toString(_aceleracion));
+                
+                VentanaPrincipal.datosReportes.put("velocidad-tiempo", velocidadtiempo);
+                VentanaPrincipal.datosReportes.put("aceleracion-tiempo", aceleraciontiempo);
+                VentanaPrincipal.datosReportes.put("x-y", xy);
+                
+               
                 repaint();
             }
         }catch(Exception e){
