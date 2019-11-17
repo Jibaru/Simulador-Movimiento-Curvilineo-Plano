@@ -5,6 +5,7 @@
  */
 package simuladormovimientocurvilineo;
 
+import ecuaciones.FuncionVectorial;
 import ecuaciones.Monomio;
 import ecuaciones.Polinomio;
 import java.awt.Color;
@@ -42,7 +43,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         labelXValues = new javax.swing.JLabel();
         labelTiempoMax = new javax.swing.JLabel();
-        txtEcuacionPosicion = new javax.swing.JTextField();
+        txtEcuacionPosicionY = new javax.swing.JTextField();
         txtEcuacionTiempo = new javax.swing.JTextField();
         btnReportes = new javax.swing.JButton();
         btnConfiguracion = new javax.swing.JButton();
@@ -84,6 +85,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnInformacion = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         progressBarSimulacion = new javax.swing.JProgressBar();
+        txtEcuacionPosicionX = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtTiempoEstatico = new javax.swing.JTextField();
+        btnTiempoEstatico = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        btnEjemplos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador Movimiento Curvilíneo Plano");
@@ -112,20 +119,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setText("<html><b>SIMULADOR MOVIMIENTO CURVILÍNEO PLANO</b></html>");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 22, 987, -1));
 
-        labelXValues.setText("Ecuación Posición");
+        labelXValues.setText("Posición Y");
         getContentPane().add(labelXValues, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, 130, 20));
 
         labelTiempoMax.setText("Tiempo máximo (s)");
         getContentPane().add(labelTiempoMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, 130, 20));
 
-        txtEcuacionPosicion.addActionListener(new java.awt.event.ActionListener() {
+        txtEcuacionPosicionY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEcuacionPosicionActionPerformed(evt);
+                txtEcuacionPosicionYActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEcuacionPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 90, 140, -1));
+        getContentPane().add(txtEcuacionPosicionY, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 90, 140, -1));
 
-        txtEcuacionTiempo.setText("500");
+        txtEcuacionTiempo.setText("5");
         getContentPane().add(txtEcuacionTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 140, -1));
 
         btnReportes.setText("Reportes");
@@ -135,7 +142,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 290, 180, -1));
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 180, -1));
 
         btnConfiguracion.setText("Configuracion");
         btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +150,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnConfiguracionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, 180, -1));
+        getContentPane().add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 360, 180, -1));
 
         comboEstilos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fondo 1", "Fondo 2", "Fondo 3", "Cuadricula" }));
         comboEstilos.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnPausarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 430, 180, -1));
+        getContentPane().add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, 180, -1));
 
         btnTerminar.setText("TERMINAR");
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnTerminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 470, 180, -1));
+        getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 490, 180, -1));
 
         labelPosicionX.setText("Posición X");
         getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 50, 20));
@@ -224,7 +231,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("DATOS INICIALES (MKS):");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 270, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 270, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("INFORMACIÓN DE LA SIMULACIÓN (MKS):");
@@ -250,7 +257,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 180, -1));
+        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 180, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Plano Simulación");
@@ -316,7 +323,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(btnDelay, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 60, 30));
 
         jLabel7.setText("Movimiento Parabólico");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 130, 20));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 130, 20));
 
         btnInsertMovParabolico.setText("Insertar Datos");
         btnInsertMovParabolico.addActionListener(new java.awt.event.ActionListener() {
@@ -324,7 +331,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnInsertMovParabolicoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInsertMovParabolico, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 140, -1));
+        getContentPane().add(btnInsertMovParabolico, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, 140, -1));
 
         btnGenEcVelocidad.setText("Generar Ec. Vel");
         btnGenEcVelocidad.addActionListener(new java.awt.event.ActionListener() {
@@ -332,7 +339,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnGenEcVelocidadActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenEcVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 130, -1));
+        getContentPane().add(btnGenEcVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 130, -1));
 
         btnGenEcAceleracion.setText("Generar Ec. Acelera.");
         btnGenEcAceleracion.addActionListener(new java.awt.event.ActionListener() {
@@ -340,7 +347,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnGenEcAceleracionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenEcAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 250, 140, -1));
+        getContentPane().add(btnGenEcAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 280, 140, -1));
 
         btnInformacion.setText("Acerca de");
         btnInformacion.addActionListener(new java.awt.event.ActionListener() {
@@ -354,17 +361,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel8.setText("Más información");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 100, 30));
         getContentPane().add(progressBarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 530, 10));
+        getContentPane().add(txtEcuacionPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 60, 140, -1));
+
+        jLabel9.setText("Posición X");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 120, 20));
+
+        txtTiempoEstatico.setText("0");
+        getContentPane().add(txtTiempoEstatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 70, -1));
+
+        btnTiempoEstatico.setText("Ok");
+        btnTiempoEstatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTiempoEstaticoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTiempoEstatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 210, 60, -1));
+
+        jLabel10.setText("Calcular en tiempo");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 120, 20));
+
+        btnEjemplos.setText("Ejemplos");
+        btnEjemplos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjemplosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEjemplos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 100, -1));
 
         setSize(new java.awt.Dimension(1040, 589));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEcuacionPosicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEcuacionPosicionActionPerformed
+    private void txtEcuacionPosicionYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEcuacionPosicionYActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEcuacionPosicionActionPerformed
+    }//GEN-LAST:event_txtEcuacionPosicionYActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        VentanaReportes ventanaReportes = new VentanaReportes(datosReportes);
+        VentanaReportes ventanaReportes = new VentanaReportes(datosReportes,datosIndividuales);
         ventanaReportes.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
@@ -426,23 +459,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         
-        String valor = txtEcuacionPosicion.getText();
-        Polinomio p = new Polinomio(valor);
-        System.out.println(p.toString());
-        System.out.println(p.getY(2));
+        Polinomio funcionRealX = new Polinomio(txtEcuacionPosicionX.getText());
+        Polinomio funcionRealY = new Polinomio(txtEcuacionPosicionY.getText());
         
         try{
-            planoCartesiano1.setPolinomio(p);
+            planoCartesiano1.setVectorPosicion(new FuncionVectorial(funcionRealX, funcionRealY));
             planoCartesiano1.setTiempoMax(Double.parseDouble(txtEcuacionTiempo.getText()));
         }catch(NumberFormatException e){
             System.out.println("Ocurrió un error");
         }
         
         VentanaPrincipal.datosReportes = new HashMap<>();
+        VentanaPrincipal.datosIndividuales = new HashMap<>();
         
         planoCartesiano1.restart();
         btnIniciar.setEnabled(false);
         btnPausar.setEnabled(true);
+        btnReportes.setEnabled(false);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnCambiarPosInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPosInicialActionPerformed
@@ -499,22 +532,46 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInformacionActionPerformed
 
     private void btnGenEcVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenEcVelocidadActionPerformed
-        String ecuacionPosicion = txtEcuacionPosicion.getText();
+        String ecuacionPosX= txtEcuacionPosicionX.getText();
+        String ecuacionPosY= txtEcuacionPosicionY.getText();
         String ecuacionVelocidad = "";
         try{
-            ecuacionVelocidad = new Polinomio(ecuacionPosicion).getDerivada().toString();
+            ecuacionVelocidad = new 
+                FuncionVectorial(ecuacionPosX, ecuacionPosY).getDerivada().toString();
         }catch(Exception e){System.out.println("Error al capturar datos");}
         txtEcuacionVelocidad.setText(ecuacionVelocidad);
     }//GEN-LAST:event_btnGenEcVelocidadActionPerformed
 
     private void btnGenEcAceleracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenEcAceleracionActionPerformed
-        String ecuacionPosicion = txtEcuacionPosicion.getText();
+        String ecuacionPosX= txtEcuacionPosicionX.getText();
+        String ecuacionPosY= txtEcuacionPosicionY.getText();
         String ecuacionAceleracion = "";
         try{
-            ecuacionAceleracion = new Polinomio(ecuacionPosicion).getDerivada().getDerivada().toString();
+            ecuacionAceleracion = new 
+                FuncionVectorial(ecuacionPosX, ecuacionPosY).getDerivada().getDerivada().toString();
         }catch(Exception e){System.out.println("Error al capturar datos");}
         txtEcuacionAceleracion.setText(ecuacionAceleracion);
     }//GEN-LAST:event_btnGenEcAceleracionActionPerformed
+
+    private void btnTiempoEstaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiempoEstaticoActionPerformed
+        double tiempoEstatico = 0;
+        try{
+            tiempoEstatico = Double.parseDouble(txtTiempoEstatico.getText());
+        }catch(NumberFormatException e){
+            System.out.println("Error al capturar datos");
+        }
+        
+        Polinomio funcionRealX = new Polinomio(txtEcuacionPosicionX.getText());
+        Polinomio funcionRealY = new Polinomio(txtEcuacionPosicionY.getText());
+        planoCartesiano1.setVectorPosicion(new FuncionVectorial(funcionRealX, funcionRealY));
+        
+        planoCartesiano1.setDatosEnTiempo(tiempoEstatico);
+    }//GEN-LAST:event_btnTiempoEstaticoActionPerformed
+
+    private void btnEjemplosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjemplosActionPerformed
+        VentanaEjemplos ventanaEjemplos = new VentanaEjemplos();
+        ventanaEjemplos.setVisible(true);
+    }//GEN-LAST:event_btnEjemplosActionPerformed
 
     @Override
     public Image getIconImage() {
@@ -559,6 +616,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     private boolean isSuspended = false;
     public static HashMap<String, List<List<Double>>> datosReportes; 
+    public static HashMap<String, List<Double>> datosIndividuales;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel LabelAceleración;
     public static javax.swing.JLabel LabelTiempo;
@@ -566,6 +624,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnCambiarPosInicial;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnDelay;
+    private javax.swing.JButton btnEjemplos;
     private javax.swing.JButton btnEscala;
     private javax.swing.JButton btnGenEcAceleracion;
     private javax.swing.JButton btnGenEcVelocidad;
@@ -575,8 +634,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPausar;
     public static javax.swing.JButton btnReportes;
     private javax.swing.JButton btnTerminar;
+    private javax.swing.JButton btnTiempoEstatico;
     private javax.swing.JComboBox comboEstilos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -586,6 +647,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelEcuacionAceleracion;
     private javax.swing.JLabel labelEcuacionVelocidad;
     public static javax.swing.JLabel labelPosicionX;
@@ -596,12 +658,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JProgressBar progressBarSimulacion;
     private javax.swing.JTextField txtDelay;
     public static javax.swing.JTextField txtEcuacionAceleracion;
-    public static javax.swing.JTextField txtEcuacionPosicion;
+    public static javax.swing.JTextField txtEcuacionPosicionX;
+    public static javax.swing.JTextField txtEcuacionPosicionY;
     public static javax.swing.JTextField txtEcuacionTiempo;
     public static javax.swing.JTextField txtEcuacionVelocidad;
     private javax.swing.JTextField txtEscala;
     private javax.swing.JTextField txtPosInicialX;
     private javax.swing.JTextField txtPosInicialY;
+    private javax.swing.JTextField txtTiempoEstatico;
     public static javax.swing.JTextField txtfAcel;
     public static javax.swing.JTextField txtfPosX;
     public static javax.swing.JTextField txtfPosY;

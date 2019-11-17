@@ -5,6 +5,7 @@
  */
 package simuladormovimientocurvilineo;
 
+import ecuaciones.FuncionVectorial;
 import ecuaciones.Monomio;
 import ecuaciones.Polinomio;
 import java.awt.Color;
@@ -32,14 +33,14 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     private int escala;
     private int delay;
     private double tiempoMax;
-    private Polinomio polinomio;
+    private FuncionVectorial vectorPosicion;
     /**
      * Creates new form PlanoCartesiano
      */
     public PlanoCartesiano() {
         initComponents();
         sizeObject = new Dimension(10,10);
-        background = new ImageIcon("src/assets/img/fondo1.jpg").getImage();
+        background = new ImageIcon("src/assets/img/cuadricula.jpg").getImage();
         escala = 45;
         delay = 30;
     }
@@ -56,28 +57,23 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     @Override
     public void run() {
         isRunning = true;
-        Polinomio vel = polinomio.getDerivada();
-        Polinomio acel = vel.getDerivada();
+        FuncionVectorial vel = vectorPosicion.getDerivada();
+        FuncionVectorial acel = vel.getDerivada();
         
         List<List<Double>> velocidadtiempo = new ArrayList<>();
         List<List<Double>> aceleraciontiempo = new ArrayList<>();
         List<List<Double>> xy = new ArrayList<>();
         
+        List<Double> velocidades = new ArrayList<>();
+        List<Double> aceleraciones = new ArrayList<>();
+        List<Double> posicionesX = new ArrayList<>();
+        List<Double> posicionesY = new ArrayList<>();
+        
+        
         VentanaPrincipal.datosReportes.clear();
+        VentanaPrincipal.datosIndividuales.clear();
         
         try{
-            /*while(true){
-                while(x<getWidth()-30){
-                Thread.sleep(50);
-                x+=10;
-                repaint();
-                }
-                while(x>10){
-                    Thread.sleep(50);
-                    x-=10;
-                    repaint();
-                }
-            }*/
             for( double tiempo = 0; tiempo <= tiempoMax && isRunning; tiempo +=0.01 ){
                 double porcentaje = tiempo*100/tiempoMax;
                 
@@ -88,11 +84,12 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                 //binomios[0] = new Monomio(3,1);
                 //binomios[1] = new Monomio(-2,2);
                 
-                double _x = tiempo*Math.cos(Math.PI/6)*22;
+                //double _x = tiempo*Math.cos(Math.PI/6)*22;
                 //double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
-                double _y = polinomio.getY(_x);
-                double _velocidad = vel.getY(_x);
-                double _aceleracion = acel.getY(_x);
+                double _x = vectorPosicion.getValorI(tiempo);
+                double _y = vectorPosicion.getValorJ(tiempo);
+                double _velocidad = vel.getModulo(tiempo);
+                double _aceleracion = acel.getModulo(tiempo);
                 
                 List<Double> datosVT = new ArrayList<>();
                 datosVT.add(_velocidad);
@@ -108,21 +105,28 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                 datosxy.add(_x);
                 datosxy.add(_y);
                 xy.add(datosxy);
-                //System.out.print(_x);
-                //System.out.print(",");
-                //System.out.println(_y);
+                
+                velocidades.add(_velocidad);
+                aceleraciones.add(_aceleracion);
+                posicionesX.add(_x);
+                posicionesY.add(_y);
                 
                 setObjectPosition(_x,_y);
                 
-                VentanaPrincipal.txtfTiempo.setText(Double.toString(tiempo));
-                VentanaPrincipal.txtfPosX.setText(Double.toString(_x));
-                VentanaPrincipal.txtfPosY.setText(Double.toString(_y));
-                VentanaPrincipal.txtfVel.setText(Double.toString(_velocidad));
-                VentanaPrincipal.txtfAcel.setText(Double.toString(_aceleracion));
+                VentanaPrincipal.txtfTiempo.setText(Float.toString((float)tiempo));
+                VentanaPrincipal.txtfPosX.setText(Float.toString((float)_x));
+                VentanaPrincipal.txtfPosY.setText(Float.toString((float)_y));
+                VentanaPrincipal.txtfVel.setText(Float.toString((float)_velocidad));
+                VentanaPrincipal.txtfAcel.setText(Float.toString((float)_aceleracion));
                 
                 VentanaPrincipal.datosReportes.put("velocidad-tiempo", velocidadtiempo);
                 VentanaPrincipal.datosReportes.put("aceleracion-tiempo", aceleraciontiempo);
                 VentanaPrincipal.datosReportes.put("x-y", xy);
+                
+                VentanaPrincipal.datosIndividuales.put("velocidades", velocidades);
+                VentanaPrincipal.datosIndividuales.put("aceleraciones", aceleraciones);
+                VentanaPrincipal.datosIndividuales.put("posicionesx", posicionesX);
+                VentanaPrincipal.datosIndividuales.put("posicionesy", posicionesY);
                 
                
                 repaint();
@@ -130,6 +134,23 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         }catch(Exception e){
             System.out.println("Ocurrió un error:"+e.getMessage());
         }
+    }
+    
+    public void setDatosEnTiempo(double t){
+        
+        double _x = vectorPosicion.getValorI(t);
+        double _y = vectorPosicion.getValorJ(t);
+        FuncionVectorial vel = vectorPosicion.getDerivada();
+        FuncionVectorial acel = vel.getDerivada();
+        
+        VentanaPrincipal.txtfTiempo.setText(Float.toString((float)t));
+        VentanaPrincipal.txtfPosX.setText(Double.toString((float)_x));
+        VentanaPrincipal.txtfPosY.setText(Double.toString((float)_y));
+        VentanaPrincipal.txtfVel.setText(Double.toString((float)vel.getModulo(t)));
+        VentanaPrincipal.txtfAcel.setText(Double.toString((float)acel.getModulo(t)));
+        
+        setObjectPosition(_x, _y);
+        repaint();
     }
     
     public void restart(){
@@ -178,8 +199,8 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         this.tiempoMax = tmax;
     }
     
-    public void setPolinomio(Polinomio p){
-        this.polinomio = p;
+    public void setVectorPosicion(FuncionVectorial r){
+        this.vectorPosicion = r;
     }
     
     /**

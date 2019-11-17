@@ -62,7 +62,17 @@ public class VentanaReportes extends javax.swing.JFrame {
         
     }
     
-    public VentanaReportes(HashMap<String, List<List<Double>>> reportes){
+    private float getMax(List<Double> t){
+        double max = 0;
+        for (int i = 0; i < t.size(); i++) {
+            if (t.get(i) > max) {
+                max = t.get(i);
+            }
+        }
+        return (float)max;
+    }
+    
+    public VentanaReportes(HashMap<String, List<List<Double>>> reportes, HashMap<String, List<Double>> reportesUnicos){
         initComponents();
         
         this.reportes = reportes;
@@ -72,6 +82,15 @@ public class VentanaReportes extends javax.swing.JFrame {
         chartPanel.setVisible(true);
         chartPanel.setLocation(280,60);
         add(chartPanel);
+        crearSeries(reportes.get("velocidad-tiempo"));
+        
+        etiquetaX.setText("Velocidad");
+        etiquetaY.setText("Tiempo");
+        
+        this.txtReportesVelocidad.setText(Float.toString(this.getMax(reportesUnicos.get("velocidades"))));
+        this.txtReportesAceleracion.setText(Float.toString(this.getMax(reportesUnicos.get("aceleraciones"))));
+        this.txtReportesPosicionX.setText(Float.toString(this.getMax(reportesUnicos.get("posicionesx"))));
+        this.txtReportesPosicionY.setText(Float.toString(this.getMax(reportesUnicos.get("posicionesy"))));
     }
 
     /**
@@ -93,13 +112,13 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtReportesVelocidad = new javax.swing.JTextField();
         txtReportesAceleracion = new javax.swing.JTextField();
-        txtReportesDistancia = new javax.swing.JTextField();
-        txtReportesAltura = new javax.swing.JTextField();
+        txtReportesPosicionX = new javax.swing.JTextField();
+        txtReportesPosicionY = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         etiquetaX = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        etiquetaY = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -124,10 +143,10 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel6.setText("REPORTE GENERAL");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Distancia máxima");
+        jLabel8.setText("Posición X Máxima");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Altura máxima");
+        jLabel9.setText("Posición Y Máxima");
 
         txtReportesVelocidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtReportesVelocidad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -142,18 +161,18 @@ public class VentanaReportes extends javax.swing.JFrame {
         txtReportesAceleracion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtReportesAceleracion.setEnabled(false);
 
-        txtReportesDistancia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtReportesDistancia.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtReportesDistancia.setEnabled(false);
-        txtReportesDistancia.addActionListener(new java.awt.event.ActionListener() {
+        txtReportesPosicionX.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtReportesPosicionX.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtReportesPosicionX.setEnabled(false);
+        txtReportesPosicionX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReportesDistanciaActionPerformed(evt);
+                txtReportesPosicionXActionPerformed(evt);
             }
         });
 
-        txtReportesAltura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtReportesAltura.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtReportesAltura.setEnabled(false);
+        txtReportesPosicionY.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtReportesPosicionY.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtReportesPosicionY.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("RELACIÓN DE DATOS");
@@ -172,9 +191,11 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
 
+        etiquetaX.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         etiquetaX.setText("Etiqueta X");
 
-        jLabel3.setText("Etiqueta Y");
+        etiquetaY.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        etiquetaY.setText("Etiqueta Y");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,24 +224,23 @@ public class VentanaReportes extends javax.swing.JFrame {
                                             .addGap(22, 22, 22)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtReportesVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtReportesAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtReportesDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtReportesAceleracion, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtReportesPosicionY, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtReportesPosicionX, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtReportesAceleracion, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(172, 172, 172)
+                                    .addComponent(etiquetaY)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(66, 66, 66)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel10))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(144, 145, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(etiquetaX, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel10)))
+                        .addGap(144, 145, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(etiquetaX, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(196, 196, 196))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,17 +260,17 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtReportesAceleracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(4, 4, 4)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtReportesDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtReportesPosicionX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtReportesAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                    .addComponent(txtReportesPosicionY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(etiquetaY, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(etiquetaX)
                 .addGap(13, 13, 13)
                 .addComponent(jButton2)
@@ -261,9 +281,9 @@ public class VentanaReportes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtReportesDistanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReportesDistanciaActionPerformed
+    private void txtReportesPosicionXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReportesPosicionXActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtReportesDistanciaActionPerformed
+    }//GEN-LAST:event_txtReportesPosicionXActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int ind = jComboBox1.getSelectedIndex();
@@ -285,11 +305,12 @@ public class VentanaReportes extends javax.swing.JFrame {
             case 2://POSICIÓN X VS POSICIÓN Y
                lista = reportes.get("x-y");
                tituloChart = "Posición X(m) vs Posición Y(m)";
-               etiquetaXChart = "Velocidad";
-               etiquetaYChart = "Tiempo";
+               etiquetaXChart = "Posición X";
+               etiquetaYChart = "Posición Y";
                break;
         }
          etiquetaX.setText(etiquetaXChart);
+         etiquetaY.setText(etiquetaYChart);
          crearSeries(lista);
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -337,21 +358,21 @@ public class VentanaReportes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etiquetaX;
+    private javax.swing.JLabel etiquetaY;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtReportesAceleracion;
-    private javax.swing.JTextField txtReportesAltura;
-    private javax.swing.JTextField txtReportesDistancia;
+    private javax.swing.JTextField txtReportesPosicionX;
+    private javax.swing.JTextField txtReportesPosicionY;
     private javax.swing.JTextField txtReportesVelocidad;
     // End of variables declaration//GEN-END:variables
 }

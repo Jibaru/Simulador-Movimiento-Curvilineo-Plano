@@ -5,6 +5,8 @@
  */
 package simuladormovimientocurvilineo;
 
+import ecuaciones.Polinomio;
+
 /**
  *
  * @author usuario
@@ -45,9 +47,8 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCalcularAceleracion = new javax.swing.JButton();
+        btnCalcularVelocidad = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,10 +58,10 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         posicionSelect = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtEcuacionPosicion = new javax.swing.JTextField();
+        txtEcuacionVelocidad = new javax.swing.JTextField();
+        txtEcuacionAceleracion = new javax.swing.JTextField();
+        txtGravedad = new javax.swing.JTextField();
         labelPosicion = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -103,14 +104,21 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, -1, -1));
 
-        jButton3.setText("Calcular");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
+        btnCalcularAceleracion.setText("Calcular");
+        btnCalcularAceleracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularAceleracionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCalcularAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
 
-        jButton4.setText("Calcular");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
-
-        jButton5.setText("Ok");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 70, -1));
+        btnCalcularVelocidad.setText("Calcular");
+        btnCalcularVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularVelocidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCalcularVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
 
         jButton6.setText("Ok");
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 70, -1));
@@ -122,18 +130,18 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel2.setText("Ecuacion de velocidad:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
 
-        jLabel4.setText("Ecuacion de posicion:");
+        jLabel4.setText("Ecuacion de posición:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 58, 140, 30));
 
-        jLabel5.setText("Ecuacion de la aceleracion:");
+        jLabel5.setText("Ecuacion de aceleración:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 30));
 
         jLabel7.setText("Aceleración gravedad:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("ECUACIONES:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 23, 84, 20));
+        jLabel3.setText("CALCULADORA DE ECUACIONES POLINÓMICAS:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 23, 310, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setLabelFor(posicionSelect);
@@ -149,26 +157,30 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(posicionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 61, 110, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtEcuacionPosicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtEcuacionPosicionActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 120, 30));
+        getContentPane().add(txtEcuacionPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 120, 30));
 
-        jTextField2.setEnabled(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtEcuacionVelocidad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtEcuacionVelocidad.setDragEnabled(true);
+        txtEcuacionVelocidad.setEnabled(false);
+        txtEcuacionVelocidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtEcuacionVelocidadActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 120, 30));
+        getContentPane().add(txtEcuacionVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 120, 30));
 
-        jTextField3.setEnabled(false);
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 120, 30));
+        txtEcuacionAceleracion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtEcuacionAceleracion.setDragEnabled(true);
+        txtEcuacionAceleracion.setEnabled(false);
+        getContentPane().add(txtEcuacionAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 120, 30));
 
-        jTextField5.setText("9.8");
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 240, 120, -1));
+        txtGravedad.setText("9.8");
+        getContentPane().add(txtGravedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 240, 120, -1));
 
         labelPosicion.setText("Posición");
         getContentPane().add(labelPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 70, 20));
@@ -221,13 +233,13 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtEcuacionPosicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEcuacionPosicionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtEcuacionPosicionActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtEcuacionVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEcuacionVelocidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtEcuacionVelocidadActionPerformed
 
     private void posicionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicionSelectActionPerformed
         int id = posicionSelect.getSelectedIndex();
@@ -314,6 +326,32 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCalcularVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularVelocidadActionPerformed
+        Polinomio velocidad;
+        txtEcuacionVelocidad.setText("");
+        try{
+            velocidad =new Polinomio(txtEcuacionPosicion.getText()).getDerivada();
+            txtEcuacionVelocidad.setText(velocidad.toString());
+            txtEcuacionVelocidad.setEnabled(true);
+        }catch(Exception e){
+            System.out.println("Ocurrió un error");
+            txtEcuacionVelocidad.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnCalcularVelocidadActionPerformed
+
+    private void btnCalcularAceleracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularAceleracionActionPerformed
+        Polinomio aceleracion;
+        txtEcuacionAceleracion.setText("");
+        try{
+            aceleracion =new Polinomio(txtEcuacionPosicion.getText()).getDerivada().getDerivada();
+            txtEcuacionAceleracion.setText(aceleracion.toString());
+            txtEcuacionAceleracion.setEnabled(true);
+        }catch(Exception e){
+            System.out.println("Ocurrió un error");
+            txtEcuacionAceleracion.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnCalcularAceleracionActionPerformed
     
     private void cambiarEstadoCombos(){
         if(ocultarPosicion)posicionSelect.setSelectedIndex(0);
@@ -370,11 +408,10 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> aceleracionSelect;
+    private javax.swing.JButton btnCalcularAceleracion;
+    private javax.swing.JButton btnCalcularVelocidad;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -389,14 +426,14 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel labelPosicion;
     private javax.swing.JComboBox<String> posicionSelect;
     private javax.swing.JComboBox<String> reporteSelect;
     private javax.swing.JComboBox<String> tiempoSelect;
+    private javax.swing.JTextField txtEcuacionAceleracion;
+    private javax.swing.JTextField txtEcuacionPosicion;
+    private javax.swing.JTextField txtEcuacionVelocidad;
+    public static javax.swing.JTextField txtGravedad;
     private javax.swing.JComboBox<String> velocidadSelect;
     // End of variables declaration//GEN-END:variables
 }

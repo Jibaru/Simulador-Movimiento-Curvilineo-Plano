@@ -5,7 +5,9 @@
  */
 package simuladormovimientocurvilineo;
 
+import ecuaciones.FuncionVectorial;
 import ecuaciones.MovilParabolico;
+import ecuaciones.Polinomio;
 
 /**
  *
@@ -130,10 +132,29 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
         this.txtVelX.setText(Float.toString((float)velX));
         this.txtVelY.setText(Float.toString((float)velY));
         this.txtTiempoVuelo.setText(Float.toString((float)tiempoVuelo));
+        
+        VentanaConfiguracion a = new VentanaConfiguracion();
+        a.setVisible(false);
+        a.dispose();
+        
+        double gravedad = Double.parseDouble(VentanaConfiguracion.txtGravedad.getText());
+        double coefY = 0.5*gravedad;
+        
+        String textoX = Float.toString((float)velX)+"*t^1";
+        String textoY = Float.toString((float)velY)+"*t^1+-"+(float)coefY+"*t^2";
+        
+        System.out.println(gravedad);
+        System.out.println(textoY);
+        Polinomio x = new Polinomio(textoX);
+        Polinomio y = new Polinomio(textoY);
+        vectorParabolico = new FuncionVectorial(x, y);
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        VentanaPrincipal.txtEcuacionPosicion.setText(movilParabolico.trayectoria());
+
+        
+        VentanaPrincipal.txtEcuacionPosicionX.setText(vectorParabolico.getFuncionI().toString());
+        VentanaPrincipal.txtEcuacionPosicionY.setText(vectorParabolico.getFuncionJ().toString());
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -173,6 +194,7 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
     }
     
     public static MovilParabolico movilParabolico;
+    private FuncionVectorial vectorParabolico;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAceptar;

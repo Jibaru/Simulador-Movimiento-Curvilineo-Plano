@@ -57,7 +57,7 @@ public class Monomio {
         if( exp == 0.0 ){
             return ""+coef;
         }
-        return coef+"*x^"+exp;
+        return coef+"*t^"+exp;
     }
     
 }
