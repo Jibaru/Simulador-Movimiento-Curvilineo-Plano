@@ -50,4 +50,11 @@ public class Vector {
             return atan(i/j);
         }
     }
+    
+    // Nota: se supone que el nuevo vector está en el eje Z, y se devuelve su valor
+    public double crossBy(Vector v){
+        double z1 = this.i * v.getJ();
+        double z2 = this.j * v.getI();
+        return z1-z2;
+    }
 }

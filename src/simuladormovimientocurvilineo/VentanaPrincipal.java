@@ -92,6 +92,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnTiempoEstatico = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnEjemplos = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txtfVelRad = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtfVelTransv = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtfAcelNormal = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtfAcelTang = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtfRadCurv = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtfAcelRad = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtfAcelTransv = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador Movimiento Curvilíneo Plano");
@@ -145,7 +159,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 180, -1));
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, 140, -1));
 
         btnConfiguracion.setText("Configuracion");
         btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnConfiguracionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 360, 180, -1));
+        getContentPane().add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 410, 140, -1));
 
         comboEstilos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fondo 1", "Fondo 2", "Fondo 3", "Cuadricula" }));
         comboEstilos.addActionListener(new java.awt.event.ActionListener() {
@@ -170,24 +184,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnPausarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, 180, -1));
+        getContentPane().add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, 140, -1));
 
+        btnTerminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnTerminar.setForeground(new java.awt.Color(255, 255, 255));
         btnTerminar.setText("TERMINAR");
+        btnTerminar.setEnabled(false);
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 490, 180, -1));
+        getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 540, 140, -1));
 
         labelPosicionX.setText("Posición X");
-        getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 70, 20));
+        getContentPane().add(labelPosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 70, 20));
 
         LabelVelocidad.setText("Velocidad");
-        getContentPane().add(LabelVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, -1, 20));
+        getContentPane().add(LabelVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 20));
 
         LabelTiempo.setText("Tiempo");
-        getContentPane().add(LabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, 20));
+        getContentPane().add(LabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, 20));
 
         txtfPosX.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfPosX.setEnabled(false);
@@ -196,22 +213,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 txtfPosXActionPerformed(evt);
             }
         });
-        getContentPane().add(txtfPosX, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 140, 30));
+        getContentPane().add(txtfPosX, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 140, 30));
 
         txtfVel.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfVel.setEnabled(false);
-        getContentPane().add(txtfVel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 140, 30));
+        getContentPane().add(txtfVel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 140, 30));
 
         txtfTiempo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfTiempo.setDoubleBuffered(true);
         txtfTiempo.setEnabled(false);
-        getContentPane().add(txtfTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 140, 30));
+        getContentPane().add(txtfTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, 140, 30));
 
         labelPosicionY.setText("Posición Y");
-        getContentPane().add(labelPosicionY, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, -1, 20));
+        getContentPane().add(labelPosicionY, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, -1, 20));
 
         LabelAceleración.setText("Aceleración");
-        getContentPane().add(LabelAceleración, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, -1, 20));
+        getContentPane().add(LabelAceleración, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, 20));
 
         txtfPosY.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfPosY.setEnabled(false);
@@ -220,7 +237,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 txtfPosYActionPerformed(evt);
             }
         });
-        getContentPane().add(txtfPosY, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 140, 30));
+        getContentPane().add(txtfPosY, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 140, 30));
 
         txtfAcel.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfAcel.setEnabled(false);
@@ -229,7 +246,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 txtfAcelActionPerformed(evt);
             }
         });
-        getContentPane().add(txtfAcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, 140, 30));
+        getContentPane().add(txtfAcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 140, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -238,7 +255,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("INFORMACIÓN DE LA SIMULACIÓN (MKS):");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, -1, 20));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, 20));
 
         labelEcuacionVelocidad.setText("Ecuación velocidad");
         getContentPane().add(labelEcuacionVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 130, 20));
@@ -254,13 +271,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtEcuacionAceleracion.setEnabled(false);
         getContentPane().add(txtEcuacionAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 140, -1));
 
+        btnIniciar.setBackground(new java.awt.Color(0, 153, 51));
         btnIniciar.setText("INICIAR");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 180, -1));
+        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 460, 140, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Plano Simulación");
@@ -268,7 +286,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Posición");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 120, -1));
 
         btnCambiarPosInicial.setText("Cambiar");
         btnCambiarPosInicial.addActionListener(new java.awt.event.ActionListener() {
@@ -276,16 +294,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnCambiarPosInicialActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCambiarPosInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 490, 90, -1));
+        getContentPane().add(btnCambiarPosInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 120, -1));
 
         txtPosInicialX.setText("0");
-        getContentPane().add(txtPosInicialX, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 40, -1));
+        getContentPane().add(txtPosInicialX, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, 60, -1));
 
         txtPosInicialY.setText("0");
-        getContentPane().add(txtPosInicialY, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 40, -1));
+        getContentPane().add(txtPosInicialY, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 410, 60, -1));
 
         jLabel3.setText("Escala");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 60, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 120, 20));
 
         txtEscala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtEscala.setText("45");
@@ -295,7 +313,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 txtEscalaFocusGained(evt);
             }
         });
-        getContentPane().add(txtEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 70, 30));
+        getContentPane().add(txtEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 80, 30));
 
         btnEscala.setText("Ok");
         btnEscala.addActionListener(new java.awt.event.ActionListener() {
@@ -303,10 +321,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnEscalaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 60, 30));
+        getContentPane().add(btnEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 330, 50, 30));
 
         jLabel6.setText("Delay");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 60, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 310, 120, 20));
 
         txtDelay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDelay.setText("30");
@@ -317,7 +335,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 txtDelayFocusGained(evt);
             }
         });
-        getContentPane().add(txtDelay, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 70, 30));
+        getContentPane().add(txtDelay, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 330, 80, 30));
 
         btnDelay.setText("Ok");
         btnDelay.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +343,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnDelayActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDelay, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 60, 30));
+        getContentPane().add(btnDelay, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 330, 50, 30));
 
         jLabel7.setText("Movimiento Parabólico");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 130, 20));
@@ -360,11 +378,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnInformacionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 100, -1));
+        getContentPane().add(btnInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 120, -1));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Más información");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 100, 30));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 510, 120, 30));
         getContentPane().add(progressBarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 530, 10));
 
         txtEcuacionPosicionX.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -393,9 +411,58 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btnEjemplosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEjemplos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 100, -1));
+        getContentPane().add(btnEjemplos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, 120, -1));
 
-        setSize(new java.awt.Dimension(1040, 589));
+        jLabel11.setText("Vel. Radial");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 60, 30));
+
+        txtfVelRad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfVelRad.setEnabled(false);
+        getContentPane().add(txtfVelRad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 140, 30));
+
+        jLabel12.setText("Vel. Transv.");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 70, 30));
+
+        txtfVelTransv.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfVelTransv.setEnabled(false);
+        getContentPane().add(txtfVelTransv, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 140, 30));
+
+        jLabel13.setText("Ac. Normal");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 60, 30));
+
+        txtfAcelNormal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfAcelNormal.setEnabled(false);
+        getContentPane().add(txtfAcelNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 140, 30));
+
+        jLabel14.setText("Ac. Tang");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 490, 60, 30));
+
+        txtfAcelTang.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfAcelTang.setEnabled(false);
+        getContentPane().add(txtfAcelTang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, 140, 30));
+
+        jLabel15.setText("Rad. Curv.");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 60, 30));
+
+        txtfRadCurv.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfRadCurv.setEnabled(false);
+        getContentPane().add(txtfRadCurv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 140, 30));
+
+        jLabel16.setText("Ac. Radial");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 530, 60, 30));
+
+        txtfAcelRad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfAcelRad.setEnabled(false);
+        getContentPane().add(txtfAcelRad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 140, 30));
+
+        jLabel19.setText("Ac. Transv.");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 60, 30));
+
+        txtfAcelTransv.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfAcelTransv.setEnabled(false);
+        getContentPane().add(txtfAcelTransv, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 140, 30));
+
+        setSize(new java.awt.Dimension(1040, 639));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -454,7 +521,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         btnIniciar.setEnabled(true);
         btnPausar.setEnabled(false);
-        
+        btnTerminar.setEnabled(false);
+        btnConfiguracion.setEnabled(true);
         btnReportes.setEnabled(true);
         txtEscala.setEnabled(true);
         btnEscala.setEnabled(true);
@@ -509,7 +577,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         planoCartesiano1.restart();
         btnIniciar.setEnabled(false);
         btnPausar.setEnabled(true);
+        btnTerminar.setEnabled(true);
         btnReportes.setEnabled(false);
+        btnConfiguracion.setEnabled(false);
         
         txtEscala.setEnabled(false);
         btnEscala.setEnabled(false);
@@ -712,8 +782,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox comboEstilos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -741,9 +818,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtPosInicialY;
     private javax.swing.JTextField txtTiempoEstatico;
     public static javax.swing.JTextField txtfAcel;
+    public static javax.swing.JTextField txtfAcelNormal;
+    public static javax.swing.JTextField txtfAcelRad;
+    public static javax.swing.JTextField txtfAcelTang;
+    public static javax.swing.JTextField txtfAcelTransv;
     public static javax.swing.JTextField txtfPosX;
     public static javax.swing.JTextField txtfPosY;
+    public static javax.swing.JTextField txtfRadCurv;
     public static javax.swing.JTextField txtfTiempo;
     public static javax.swing.JTextField txtfVel;
+    public static javax.swing.JTextField txtfVelRad;
+    public static javax.swing.JTextField txtfVelTransv;
     // End of variables declaration//GEN-END:variables
 }

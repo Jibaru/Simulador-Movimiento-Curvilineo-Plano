@@ -27,7 +27,7 @@ public class FuncionVectorial {
         this.funcionRealj = new Polinomio(j);
     }
     
-    public Vector getValor(double t){
+    public Vector getVector(double t){
         return new Vector( this.funcionReali.getY(t), this.funcionRealj.getY(t) );
     }
     

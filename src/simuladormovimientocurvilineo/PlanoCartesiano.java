@@ -6,12 +6,11 @@
 package simuladormovimientocurvilineo;
 
 import ecuaciones.FuncionVectorial;
-import ecuaciones.Monomio;
-import ecuaciones.Polinomio;
+import ecuaciones.Vector;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.lang.Math;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,17 +78,19 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                 
                 VentanaPrincipal.progressBarSimulacion.setValue((int)porcentaje);
                 Thread.sleep(delay);
-                
-                //Monomio[] binomios = new Monomio[2];
-                //binomios[0] = new Monomio(3,1);
-                //binomios[1] = new Monomio(-2,2);
-                
-                //double _x = tiempo*Math.cos(Math.PI/6)*22;
-                //double _y = binomios[0].getValor(_x) + binomios[1].getValor(_x);
+
                 double _x = vectorPosicion.getValorI(tiempo);
                 double _y = vectorPosicion.getValorJ(tiempo);
                 double _velocidad = vel.getModulo(tiempo);
                 double _aceleracion = acel.getModulo(tiempo);
+                double _velRadial = vel.getValorI(tiempo);
+                double _velTransv = vel.getValorJ(tiempo);
+                double _radCurv = getRadioCurvatura(vel.getVector(tiempo), acel.getVector(tiempo));
+                double _acelNormal = Math.pow(vel.getVector(tiempo).getModulo(),2)/_radCurv;
+                double _acelTang = Math.sqrt(Math.pow(acel.getVector(tiempo).getModulo(), 2) - Math.pow(_acelNormal, 2));
+                double _acelRadial = acel.getValorI(tiempo);
+                double _acelTransv = acel.getValorJ(tiempo);
+                
                 
                 List<Double> datosVT = new ArrayList<>();
                 datosVT.add(_velocidad);
@@ -118,6 +119,13 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                 VentanaPrincipal.txtfPosY.setText(Float.toString((float)_y));
                 VentanaPrincipal.txtfVel.setText(Float.toString((float)_velocidad));
                 VentanaPrincipal.txtfAcel.setText(Float.toString((float)_aceleracion));
+                VentanaPrincipal.txtfAcelNormal.setText(Float.toString((float) _acelNormal));
+                VentanaPrincipal.txtfAcelTang.setText(Float.toString((float) _acelTang));
+                VentanaPrincipal.txtfAcelRad.setText(Float.toString((float) _acelRadial));
+                VentanaPrincipal.txtfAcelTransv.setText(Float.toString((float)_acelTransv));
+                VentanaPrincipal.txtfVelRad.setText(Float.toString((float)_velRadial));
+                VentanaPrincipal.txtfVelTransv.setText(Float.toString((float)_velTransv));
+                VentanaPrincipal.txtfRadCurv.setText(Float.toString((float)_radCurv));
                 
                 VentanaPrincipal.datosReportes.put("velocidad-tiempo", velocidadtiempo);
                 VentanaPrincipal.datosReportes.put("aceleracion-tiempo", aceleraciontiempo);
@@ -151,6 +159,21 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         
         setObjectPosition(_x, _y);
         repaint();
+    }
+    
+    public double getRadioCurvatura(Vector vel, Vector acel){
+        
+        // Estamos usando la fórmula: 
+        // 1/radio = |(vxa)/v^3|
+        // Como nuestro simulador es en 2D, el valor de
+        // vxa siempre será un unico valor Z, al cual
+        // corresponderá su módulo
+        
+        double sup = Math.abs(vel.crossBy(acel));
+        double inf = Math.pow(vel.getModulo(), 3);
+        
+        return inf/sup;
+        
     }
     
     public void restart(){
