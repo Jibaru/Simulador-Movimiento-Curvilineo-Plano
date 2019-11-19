@@ -49,19 +49,15 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnCalcularAceleracion = new javax.swing.JButton();
         btnCalcularVelocidad = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         posicionSelect = new javax.swing.JComboBox<>();
         txtEcuacionPosicion = new javax.swing.JTextField();
         txtEcuacionVelocidad = new javax.swing.JTextField();
         txtEcuacionAceleracion = new javax.swing.JTextField();
-        txtGravedad = new javax.swing.JTextField();
         labelPosicion = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -86,6 +82,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Aceptar");
@@ -94,7 +91,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +99,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, -1, -1));
 
         btnCalcularAceleracion.setText("Calcular");
         btnCalcularAceleracion.addActionListener(new java.awt.event.ActionListener() {
@@ -120,13 +117,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(btnCalcularVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
 
-        jButton6.setText("Ok");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 70, -1));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("DATOS CONSIDERABLES:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 204, 160, 20));
-
         jLabel2.setText("Ecuacion de velocidad:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
 
@@ -135,9 +125,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
         jLabel5.setText("Ecuacion de aceleración:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 30));
-
-        jLabel7.setText("Aceleración gravedad:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("CALCULADORA DE ECUACIONES POLINÓMICAS:");
@@ -178,9 +165,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         txtEcuacionAceleracion.setDragEnabled(true);
         txtEcuacionAceleracion.setEnabled(false);
         getContentPane().add(txtEcuacionAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 120, 30));
-
-        txtGravedad.setText("9.8");
-        getContentPane().add(txtGravedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 240, 120, -1));
 
         labelPosicion.setText("Posición");
         getContentPane().add(labelPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 70, 20));
@@ -229,7 +213,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(reporteSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 110, -1));
 
-        setSize(new java.awt.Dimension(666, 439));
+        setSize(new java.awt.Dimension(666, 379));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -412,8 +396,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcularVelocidad;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -423,7 +405,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelPosicion;
@@ -433,7 +414,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtEcuacionAceleracion;
     private javax.swing.JTextField txtEcuacionPosicion;
     private javax.swing.JTextField txtEcuacionVelocidad;
-    public static javax.swing.JTextField txtGravedad;
     private javax.swing.JComboBox<String> velocidadSelect;
     // End of variables declaration//GEN-END:variables
 }

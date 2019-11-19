@@ -8,6 +8,7 @@ package simuladormovimientocurvilineo;
 import ecuaciones.FuncionVectorial;
 import ecuaciones.MovilParabolico;
 import ecuaciones.Polinomio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,44 +47,47 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
         btnGenerar = new javax.swing.JToggleButton();
         btnAceptar = new javax.swing.JToggleButton();
         labelError = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtGravedad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Movimiento Parabólico");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(txtVelInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 120, -1));
+        getContentPane().add(txtVelInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 120, -1));
 
         jLabel1.setText("Velocidad Inicial");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, 20));
 
         jLabel2.setText("Ángulo de inclinación");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 120, 20));
         getContentPane().add(txtAngulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Inserte los siguientes datos");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 240, 20));
+        jLabel3.setText("Inserte los siguientes datos (MKS)");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 240, 20));
 
         jLabel4.setText("Velocidad en X");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 110, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 110, 20));
 
         txtVelX.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtVelX.setEnabled(false);
-        getContentPane().add(txtVelX, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 120, -1));
+        getContentPane().add(txtVelX, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 120, -1));
 
         jLabel5.setText("Velocidad en Y");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 100, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 100, 20));
 
         txtVelY.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtVelY.setEnabled(false);
-        getContentPane().add(txtVelY, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 120, -1));
+        getContentPane().add(txtVelY, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 120, -1));
 
         jLabel6.setText("Tiempo de vuelo");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 100, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 100, 20));
 
         txtTiempoVuelo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTiempoVuelo.setEnabled(false);
-        getContentPane().add(txtTiempoVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 120, -1));
+        getContentPane().add(txtTiempoVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 120, -1));
 
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +95,7 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 240, -1));
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 240, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,13 +103,19 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 240, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 240, -1));
 
         labelError.setForeground(new java.awt.Color(255, 51, 51));
         labelError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(labelError, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 240, 20));
+        getContentPane().add(labelError, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 240, 20));
 
-        setSize(new java.awt.Dimension(316, 389));
+        jLabel7.setText("Gravedad");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 110, 20));
+
+        txtGravedad.setText("9.8");
+        getContentPane().add(txtGravedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 120, -1));
+
+        setSize(new java.awt.Dimension(316, 429));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,7 +147,7 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
         a.setVisible(false);
         a.dispose();
         
-        double gravedad = Double.parseDouble(VentanaConfiguracion.txtGravedad.getText());
+        double gravedad = Double.parseDouble(txtGravedad.getText());
         double coefY = 0.5*gravedad;
         
         String textoX = Float.toString((float)velX)+"*t^1";
@@ -151,10 +161,14 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
         
-        VentanaPrincipal.txtEcuacionPosicionX.setText(vectorParabolico.getFuncionI().toString());
-        VentanaPrincipal.txtEcuacionPosicionY.setText(vectorParabolico.getFuncionJ().toString());
+        try{
+            VentanaPrincipal.txtEcuacionPosicionX.setText(vectorParabolico.getFuncionI().toString());
+            VentanaPrincipal.txtEcuacionPosicionY.setText(vectorParabolico.getFuncionJ().toString());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, Constantes.textCamposIncompletos);
+            return;
+        }
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -205,8 +219,10 @@ public class VentanaMovimientoParabolico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labelError;
     private javax.swing.JTextField txtAngulo;
+    private javax.swing.JTextField txtGravedad;
     private javax.swing.JTextField txtTiempoVuelo;
     private javax.swing.JTextField txtVelInicial;
     private javax.swing.JTextField txtVelX;

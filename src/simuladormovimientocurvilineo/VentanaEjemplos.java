@@ -35,8 +35,10 @@ public class VentanaEjemplos extends javax.swing.JFrame {
         radio3 = new javax.swing.JRadioButton();
         radio4 = new javax.swing.JRadioButton();
         radio5 = new javax.swing.JRadioButton();
+        radio6 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -50,7 +52,7 @@ public class VentanaEjemplos extends javax.swing.JFrame {
                 btnOkActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 70, -1));
+        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 70, -1));
 
         groupEcuaciones.add(radio1);
         radio1.setText("r(t) =  (2*t^3)i + (3*t^1)j");
@@ -77,7 +79,17 @@ public class VentanaEjemplos extends javax.swing.JFrame {
         radio5.setActionCommand("5");
         getContentPane().add(radio5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        setSize(new java.awt.Dimension(316, 289));
+        groupEcuaciones.add(radio6);
+        radio6.setText("r(t) = (-20*t^2+20*t^1)i + (5*t^1+-5*t^4)j");
+        radio6.setActionCommand("6");
+        radio6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(radio6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        setSize(new java.awt.Dimension(316, 339));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -106,10 +118,18 @@ public class VentanaEjemplos extends javax.swing.JFrame {
             i = "8.49*t^1";
             j = "8.49*t^1+-4.9*t^2";
         }
+        if(seleccion == 6){
+            i = "-20*t^2+20*t^1";
+            j = "5*t^1+-5*t^4";
+        }
         VentanaPrincipal.txtEcuacionPosicionX.setText(i);
         VentanaPrincipal.txtEcuacionPosicionY.setText(j);
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void radio6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radio6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,5 +175,6 @@ public class VentanaEjemplos extends javax.swing.JFrame {
     private javax.swing.JRadioButton radio3;
     private javax.swing.JRadioButton radio4;
     private javax.swing.JRadioButton radio5;
+    private javax.swing.JRadioButton radio6;
     // End of variables declaration//GEN-END:variables
 }
