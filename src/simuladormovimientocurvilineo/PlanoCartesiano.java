@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.lang.Math;
 import java.awt.Image;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -32,7 +33,13 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     private int escala;
     private int delay;
     private double tiempoMax;
+    private double tiempo;
     private FuncionVectorial vectorPosicion;
+    FuncionVectorial vel;
+    FuncionVectorial acel;
+    public static boolean mostrarVectorPosicion = true;
+    public static boolean mostrarVectorVelocidad = true;
+    public static boolean mostrarVectorAceleracion = true;
     /**
      * Creates new form PlanoCartesiano
      */
@@ -51,13 +58,37 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.red);
         g.fillOval(xPos, yPos,sizeObject.width,sizeObject.height);
+        
+        if(mostrarVectorPosicion && isRunning){
+            Color colActual = g.getColor();
+            g.setColor(Color.gray);
+            g.drawLine(0, 0+getHeight(), xPos, yPos);
+            g.setColor(colActual);
+        }
+        
+        if(mostrarVectorVelocidad && isRunning){
+            g.drawLine(xPos, yPos, 
+                xPos+getPositionXfrom(vel.getValorI(tiempo)), 
+                yPos+getPositionYfrom(vel.getValorJ(tiempo)));
+        }
+        
+        if(mostrarVectorAceleracion && isRunning){
+            Color colActual = g.getColor();
+            g.setColor(Color.blue);
+            g.drawLine(xPos, yPos, 
+                xPos+getPositionXfrom(acel.getValorI(tiempo)), 
+                yPos+getPositionYfrom(acel.getValorJ(tiempo)));
+            g.setColor(colActual);
+        }
+        
+        
     }
     
     @Override
     public void run() {
         isRunning = true;
-        FuncionVectorial vel = vectorPosicion.getDerivada();
-        FuncionVectorial acel = vel.getDerivada();
+        vel = vectorPosicion.getDerivada();
+        acel = vel.getDerivada();
         
         List<List<Double>> velocidadtiempo = new ArrayList<>();
         List<List<Double>> aceleraciontiempo = new ArrayList<>();
@@ -73,7 +104,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         VentanaPrincipal.datosIndividuales.clear();
         
         try{
-            for( double tiempo = 0; tiempo <= tiempoMax && isRunning; tiempo +=0.01 ){
+            for( tiempo = 0; tiempo <= tiempoMax && isRunning; tiempo +=0.01 ){
                 double porcentaje = tiempo*100/tiempoMax;
                 
                 VentanaPrincipal.progressBarSimulacion.setValue((int)porcentaje);
@@ -201,6 +232,14 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         this.xPos =(int) (x*escala);
         this.yPos = (int) (getHeight() - (y*escala+sizeObject.height));
         this.repaint();
+    }
+    
+    public int getPositionXfrom( double x ){
+        return (int) x*escala;
+    }
+    
+    public int getPositionYfrom( double y ){
+        return (int)(getHeight() - (y*escala));
     }
     
     public void setImageBackground( String path ){
