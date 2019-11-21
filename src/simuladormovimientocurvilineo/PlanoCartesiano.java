@@ -62,26 +62,40 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         if(mostrarVectorPosicion && isRunning){
             Color colActual = g.getColor();
             g.setColor(Color.gray);
-            g.drawLine(0, 0+getHeight(), xPos, yPos);
+            drawArrow(0, 0+getHeight(), xPos, yPos, g);
             g.setColor(colActual);
         }
         
         if(mostrarVectorVelocidad && isRunning){
-            g.drawLine(xPos, yPos, 
+            drawArrow(xPos, yPos, 
                 xPos+getPositionXfrom(vel.getValorI(tiempo)), 
-                yPos+getPositionYfrom(vel.getValorJ(tiempo)));
+                yPos+getPositionYfrom(vel.getValorJ(tiempo)), g);
         }
         
         if(mostrarVectorAceleracion && isRunning){
             Color colActual = g.getColor();
             g.setColor(Color.blue);
-            g.drawLine(xPos, yPos, 
+            drawArrow(xPos, yPos, 
                 xPos+getPositionXfrom(acel.getValorI(tiempo)), 
-                yPos+getPositionYfrom(acel.getValorJ(tiempo)));
+                yPos+getPositionYfrom(acel.getValorJ(tiempo)), g);
             g.setColor(colActual);
         }
         
         
+    }
+    
+    public void drawArrow(int x0,int y0,int x1,int y1, Graphics g){
+        double alfa=Math.atan2(y1-y0,x1-x0);
+        g.drawLine(x0,y0,x1,y1);
+        int k=5;
+        int xa=(int)(x1-k*Math.cos(alfa+1));
+        int ya=(int)(y1-k*Math.sin(alfa+1));
+        // Se dibuja un extremo de la dirección de la flecha.
+        g.drawLine(xa,ya,x1,y1);
+        xa=(int)(x1-k*Math.cos(alfa-1));
+        ya=(int)(y1-k*Math.sin(alfa-1));
+        // Se dibuja el otro extremo de la dirección de la flecha.
+        g.drawLine(xa,ya,x1,y1);
     }
     
     @Override
@@ -177,18 +191,37 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     
     public void setDatosEnTiempo(double t){
         
+        vel = vectorPosicion.getDerivada();
+        acel = vel.getDerivada();
+        
         double _x = vectorPosicion.getValorI(t);
         double _y = vectorPosicion.getValorJ(t);
-        FuncionVectorial vel = vectorPosicion.getDerivada();
-        FuncionVectorial acel = vel.getDerivada();
+        double _velocidad = vel.getModulo(t);
+        double _aceleracion = acel.getModulo(t);
+        double _velRadial = vel.getValorI(t);
+        double _velTransv = vel.getValorJ(t);
+        double _radCurv = getRadioCurvatura(vel.getVector(t), acel.getVector(t));
+        double _acelNormal = Math.pow(vel.getVector(t).getModulo(),2)/_radCurv;
+        double _acelTang = Math.sqrt(Math.pow(acel.getVector(t).getModulo(), 2) - Math.pow(_acelNormal, 2));
+        double _acelRadial = acel.getValorI(t);
+        double _acelTransv = acel.getValorJ(t);
         
         VentanaPrincipal.txtfTiempo.setText(Float.toString((float)t));
-        VentanaPrincipal.txtfPosX.setText(Double.toString((float)_x));
-        VentanaPrincipal.txtfPosY.setText(Double.toString((float)_y));
-        VentanaPrincipal.txtfVel.setText(Double.toString((float)vel.getModulo(t)));
-        VentanaPrincipal.txtfAcel.setText(Double.toString((float)acel.getModulo(t)));
+        VentanaPrincipal.txtfPosX.setText(Float.toString((float)_x));
+        VentanaPrincipal.txtfPosY.setText(Float.toString((float)_y));
+        VentanaPrincipal.txtfVel.setText(Float.toString((float)vel.getModulo(t)));
+        VentanaPrincipal.txtfAcel.setText(Float.toString((float)acel.getModulo(t)));
+        VentanaPrincipal.txtfAcelNormal.setText(Float.toString((float) _acelNormal));
+        VentanaPrincipal.txtfAcelTang.setText(Float.toString((float) _acelTang));
+        VentanaPrincipal.txtfAcelRad.setText(Float.toString((float) _acelRadial));
+        VentanaPrincipal.txtfAcelTransv.setText(Float.toString((float)_acelTransv));
+        VentanaPrincipal.txtfVelRad.setText(Float.toString((float)_velRadial));
+        VentanaPrincipal.txtfVelTransv.setText(Float.toString((float)_velTransv));
+        VentanaPrincipal.txtfRadCurv.setText(Float.toString((float)_radCurv));
         
         setObjectPosition(_x, _y);
+        isRunning = true;
+        tiempo = t;
         repaint();
     }
     

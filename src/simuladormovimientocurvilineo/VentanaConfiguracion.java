@@ -21,6 +21,9 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private boolean ocultaveloc = false;
     private boolean ocultime = false;
     private boolean ocultBtnReporte = false;
+    private boolean ocultarVectorPosicion = false;
+    private boolean ocultarVectorVelocidad = false;
+    private boolean ocultarVectorAceleracion = false;
     
     public VentanaConfiguracion() {
         initComponents();
@@ -29,6 +32,9 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         this.ocultaveloc     = VentanaPrincipal.txtfVel.isVisible();
         this.ocultime        = VentanaPrincipal.txtfTiempo.isVisible();
         this.ocultBtnReporte = VentanaPrincipal.btnReportes.isVisible();
+        this.ocultarVectorPosicion = VentanaPrincipal.labelHistoriaPosicion.isVisible();
+        this.ocultarVectorVelocidad = VentanaPrincipal.labelHistoriaVelocidad.isVisible();
+        this.ocultarVectorAceleracion = VentanaPrincipal.labelHistoriaAceleracion.isVisible();
         
         this.cambiarEstadoCombos();
       
@@ -54,7 +60,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        posicionSelect = new javax.swing.JComboBox<String>();
+        posicionSelect = new javax.swing.JComboBox<>();
         txtEcuacionPosicion = new javax.swing.JTextField();
         txtEcuacionVelocidad = new javax.swing.JTextField();
         txtEcuacionAceleracion = new javax.swing.JTextField();
@@ -62,17 +68,18 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        velocidadSelect = new javax.swing.JComboBox<String>();
-        aceleracionSelect = new javax.swing.JComboBox<String>();
-        tiempoSelect = new javax.swing.JComboBox<String>();
+        velocidadSelect = new javax.swing.JComboBox<>();
+        aceleracionSelect = new javax.swing.JComboBox<>();
+        tiempoSelect = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        reporteSelect = new javax.swing.JComboBox<String>();
+        reporteSelect = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         vectorPosicionSelect = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        vectorVelocidadSelect = new javax.swing.JComboBox();
+        vectorAceleracionSelect = new javax.swing.JComboBox();
+        titleOpcionesPlano = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +149,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel11.setPreferredSize(new java.awt.Dimension(52, 50));
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 80, 20));
 
-        posicionSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "OCULTAR" }));
+        posicionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
         posicionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 posicionSelectActionPerformed(evt);
@@ -184,7 +191,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel14.setText("Tiempo");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 199, 70, 20));
 
-        velocidadSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "OCULTAR" }));
+        velocidadSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
         velocidadSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 velocidadSelectActionPerformed(evt);
@@ -192,7 +199,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(velocidadSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 106, 110, -1));
 
-        aceleracionSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "OCULTAR" }));
+        aceleracionSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
         aceleracionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceleracionSelectActionPerformed(evt);
@@ -200,7 +207,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(aceleracionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 148, 110, -1));
 
-        tiempoSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "OCULTAR" }));
+        tiempoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOSTRAR", "OCULTAR" }));
         tiempoSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiempoSelectActionPerformed(evt);
@@ -211,7 +218,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         jLabel6.setText("Reportes");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 70, 20));
 
-        reporteSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HABILITAR", "INHABILITAR" }));
+        reporteSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HABILITAR", "INHABILITAR" }));
         reporteSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reporteSelectActionPerformed(evt);
@@ -236,11 +243,25 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(vectorPosicionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 120, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "NO MOSTRAR" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 120, -1));
+        vectorVelocidadSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        vectorVelocidadSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vectorVelocidadSelectActionPerformed(evt);
+            }
+        });
+        getContentPane().add(vectorVelocidadSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 120, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "NO MOSTRAR" }));
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 120, -1));
+        vectorAceleracionSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MOSTRAR", "NO MOSTRAR" }));
+        vectorAceleracionSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vectorAceleracionSelectActionPerformed(evt);
+            }
+        });
+        getContentPane().add(vectorAceleracionSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 120, -1));
+
+        titleOpcionesPlano.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        titleOpcionesPlano.setText("OPCIONES DEL PLANO");
+        getContentPane().add(titleOpcionesPlano, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 270, 20));
 
         setSize(new java.awt.Dimension(666, 379));
         setLocationRelativeTo(null);
@@ -302,27 +323,44 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         }else{
             VentanaPrincipal.btnReportes.setVisible(true);
         }
+        
+        if(ocultarVectorPosicion){
+            VentanaPrincipal.labelHistoriaPosicion.setVisible(false);
+            PlanoCartesiano.mostrarVectorPosicion = false;
+        } else {
+            VentanaPrincipal.labelHistoriaPosicion.setVisible(true);
+            PlanoCartesiano.mostrarVectorPosicion = true;
+        }
+        
+        if(ocultarVectorVelocidad){
+            VentanaPrincipal.labelHistoriaVelocidad.setVisible(false);
+            PlanoCartesiano.mostrarVectorVelocidad = false;
+        } else {
+            VentanaPrincipal.labelHistoriaVelocidad.setVisible(true);
+            PlanoCartesiano.mostrarVectorVelocidad = true;
+        }
+        
+        if(ocultarVectorAceleracion){
+            VentanaPrincipal.labelHistoriaAceleracion.setVisible(false);
+            PlanoCartesiano.mostrarVectorAceleracion = false;
+        } else {
+            VentanaPrincipal.labelHistoriaAceleracion.setVisible(true);
+            PlanoCartesiano.mostrarVectorAceleracion = true;
+        }
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void velocidadSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_velocidadSelectActionPerformed
         // TODO add your handling code here:
          int id = velocidadSelect.getSelectedIndex();
-        if(id == 1){
-            ocultaveloc = true;
-        }else{
-            ocultaveloc = false;
-        }
+         ocultaveloc = id == 1;
     }//GEN-LAST:event_velocidadSelectActionPerformed
 
     private void aceleracionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceleracionSelectActionPerformed
         // TODO add your handling code here:
          int id = aceleracionSelect.getSelectedIndex();
-        if(id == 1){
-            ocultacele = true;
-        }else{
-            ocultacele=false;
-        }
+         ocultacele = id == 1;
     }//GEN-LAST:event_aceleracionSelectActionPerformed
 
     private void tiempoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoSelectActionPerformed
@@ -367,9 +405,19 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularAceleracionActionPerformed
 
     private void vectorPosicionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vectorPosicionSelectActionPerformed
-        int id = posicionSelect.getSelectedIndex();
-        ocultarPosicion = id == 1;
+        int id = vectorPosicionSelect.getSelectedIndex();
+        ocultarVectorPosicion = id == 1;
     }//GEN-LAST:event_vectorPosicionSelectActionPerformed
+
+    private void vectorVelocidadSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vectorVelocidadSelectActionPerformed
+        int id = vectorVelocidadSelect.getSelectedIndex();
+        ocultarVectorVelocidad = id == 1;
+    }//GEN-LAST:event_vectorVelocidadSelectActionPerformed
+
+    private void vectorAceleracionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vectorAceleracionSelectActionPerformed
+        int id = vectorAceleracionSelect.getSelectedIndex();
+        ocultarVectorAceleracion = id == 1;
+    }//GEN-LAST:event_vectorAceleracionSelectActionPerformed
     
     private void cambiarEstadoCombos(){
         if(ocultarPosicion)posicionSelect.setSelectedIndex(0);
@@ -386,6 +434,15 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         
         if(ocultBtnReporte)reporteSelect.setSelectedIndex(0);
         else reporteSelect.setSelectedIndex(1);
+        
+        if(ocultarVectorPosicion) vectorPosicionSelect.setSelectedIndex(0);
+        else vectorPosicionSelect.setSelectedIndex(1);
+        
+        if(ocultarVectorVelocidad) vectorVelocidadSelect.setSelectedIndex(0);
+        else vectorVelocidadSelect.setSelectedIndex(1);
+        
+        if(ocultarVectorAceleracion) vectorAceleracionSelect.setSelectedIndex(0);
+        else vectorAceleracionSelect.setSelectedIndex(1);
         
     }
     
@@ -430,8 +487,6 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcularVelocidad;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -450,10 +505,13 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> posicionSelect;
     private javax.swing.JComboBox<String> reporteSelect;
     private javax.swing.JComboBox<String> tiempoSelect;
+    private javax.swing.JLabel titleOpcionesPlano;
     private javax.swing.JTextField txtEcuacionAceleracion;
     private javax.swing.JTextField txtEcuacionPosicion;
     private javax.swing.JTextField txtEcuacionVelocidad;
+    private javax.swing.JComboBox vectorAceleracionSelect;
     private javax.swing.JComboBox vectorPosicionSelect;
+    private javax.swing.JComboBox vectorVelocidadSelect;
     private javax.swing.JComboBox<String> velocidadSelect;
     // End of variables declaration//GEN-END:variables
 }

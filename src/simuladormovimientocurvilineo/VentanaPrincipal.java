@@ -106,6 +106,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtfAcelRad = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtfAcelTransv = new javax.swing.JTextField();
+        labelHistoriaVelocidad = new javax.swing.JLabel();
+        labelHistoriaAceleracion = new javax.swing.JLabel();
+        labelHistoriaPosicion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador Movimiento Curvilíneo Plano");
@@ -261,6 +264,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(labelEcuacionVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 130, 20));
 
         txtEcuacionVelocidad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtEcuacionVelocidad.setDragEnabled(true);
         txtEcuacionVelocidad.setEnabled(false);
         getContentPane().add(txtEcuacionVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, 140, -1));
 
@@ -461,6 +465,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtfAcelTransv.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtfAcelTransv.setEnabled(false);
         getContentPane().add(txtfAcelTransv, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 140, 30));
+
+        labelHistoriaVelocidad.setForeground(new java.awt.Color(255, 0, 51));
+        labelHistoriaVelocidad.setText("Velocidad");
+        getContentPane().add(labelHistoriaVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 60, 20));
+
+        labelHistoriaAceleracion.setForeground(new java.awt.Color(0, 153, 255));
+        labelHistoriaAceleracion.setText("Aceleración");
+        getContentPane().add(labelHistoriaAceleracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 320, 70, 20));
+
+        labelHistoriaPosicion.setForeground(new java.awt.Color(102, 102, 102));
+        labelHistoriaPosicion.setText("Posición");
+        getContentPane().add(labelHistoriaPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 60, 20));
 
         setSize(new java.awt.Dimension(1040, 639));
         setLocationRelativeTo(null);
@@ -801,6 +817,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelEcuacionAceleracion;
     private javax.swing.JLabel labelEcuacionVelocidad;
+    public static javax.swing.JLabel labelHistoriaAceleracion;
+    public static javax.swing.JLabel labelHistoriaPosicion;
+    public static javax.swing.JLabel labelHistoriaVelocidad;
     public static javax.swing.JLabel labelPosicionX;
     public static javax.swing.JLabel labelPosicionY;
     private javax.swing.JLabel labelTiempoMax;
