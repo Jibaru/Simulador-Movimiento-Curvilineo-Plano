@@ -40,6 +40,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     public static boolean mostrarVectorPosicion = true;
     public static boolean mostrarVectorVelocidad = true;
     public static boolean mostrarVectorAceleracion = true;
+    public static boolean detenerSiEscapa = true;
     /**
      * Creates new form PlanoCartesiano
      */
@@ -168,8 +169,8 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                 VentanaPrincipal.txtfAcelTang.setText(Float.toString((float) _acelTang));
                 VentanaPrincipal.txtfAcelRad.setText(Float.toString((float) _acelRadial));
                 VentanaPrincipal.txtfAcelTransv.setText(Float.toString((float)_acelTransv));
-                VentanaPrincipal.txtfVelRad.setText(Float.toString((float)_velRadial));
-                VentanaPrincipal.txtfVelTransv.setText(Float.toString((float)_velTransv));
+                VentanaPrincipal.txtfVelX.setText(Float.toString((float)_velRadial));
+                VentanaPrincipal.txtfVelY.setText(Float.toString((float)_velTransv));
                 VentanaPrincipal.txtfRadCurv.setText(Float.toString((float)_radCurv));
                 
                 VentanaPrincipal.datosReportes.put("velocidad-tiempo", velocidadtiempo);
@@ -215,8 +216,8 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
         VentanaPrincipal.txtfAcelTang.setText(Float.toString((float) _acelTang));
         VentanaPrincipal.txtfAcelRad.setText(Float.toString((float) _acelRadial));
         VentanaPrincipal.txtfAcelTransv.setText(Float.toString((float)_acelTransv));
-        VentanaPrincipal.txtfVelRad.setText(Float.toString((float)_velRadial));
-        VentanaPrincipal.txtfVelTransv.setText(Float.toString((float)_velTransv));
+        VentanaPrincipal.txtfVelX.setText(Float.toString((float)_velRadial));
+        VentanaPrincipal.txtfVelY.setText(Float.toString((float)_velTransv));
         VentanaPrincipal.txtfRadCurv.setText(Float.toString((float)_radCurv));
         
         setObjectPosition(_x, _y);
@@ -264,6 +265,14 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
     public void setObjectPosition( double x, double y ){
         this.xPos =(int) (x*escala);
         this.yPos = (int) (getHeight() - (y*escala+sizeObject.height));
+        
+        if(detenerSiEscapa){
+            if(this.xPos > (int) (getWidth()) || 
+               this.yPos > (int) (getHeight()) || this.yPos < 0){
+                isRunning = false;
+            }
+        }
+        
         this.repaint();
     }
     

@@ -93,9 +93,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnEjemplos = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        txtfVelRad = new javax.swing.JTextField();
+        txtfVelX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtfVelTransv = new javax.swing.JTextField();
+        txtfVelY = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtfAcelNormal = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -417,19 +417,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnEjemplos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, 120, -1));
 
-        jLabel11.setText("Vel. Radial");
+        jLabel11.setText("Vel. Cart. X");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 60, 30));
 
-        txtfVelRad.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtfVelRad.setEnabled(false);
-        getContentPane().add(txtfVelRad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 140, 30));
+        txtfVelX.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfVelX.setEnabled(false);
+        getContentPane().add(txtfVelX, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 140, 30));
 
-        jLabel12.setText("Vel. Transv.");
+        jLabel12.setText("Vel. Cart. Y");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 70, 30));
 
-        txtfVelTransv.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtfVelTransv.setEnabled(false);
-        getContentPane().add(txtfVelTransv, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 140, 30));
+        txtfVelY.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtfVelY.setEnabled(false);
+        getContentPane().add(txtfVelY, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 140, 30));
 
         jLabel13.setText("Ac. Normal");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 60, 30));
@@ -846,7 +846,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JTextField txtfRadCurv;
     public static javax.swing.JTextField txtfTiempo;
     public static javax.swing.JTextField txtfVel;
-    public static javax.swing.JTextField txtfVelRad;
-    public static javax.swing.JTextField txtfVelTransv;
+    public static javax.swing.JTextField txtfVelX;
+    public static javax.swing.JTextField txtfVelY;
     // End of variables declaration//GEN-END:variables
 }
