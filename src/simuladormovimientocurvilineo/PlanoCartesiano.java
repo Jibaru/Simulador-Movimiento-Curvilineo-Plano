@@ -10,9 +10,7 @@ import ecuaciones.Vector;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.lang.Math;
 import java.awt.Image;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -185,7 +183,7 @@ public class PlanoCartesiano extends javax.swing.JPanel implements Runnable{
                
                 repaint();
             }
-        }catch(Exception e){
+        }catch(InterruptedException e){
             System.out.println("Ocurrió un error:"+e.getMessage());
         }
     }

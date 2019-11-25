@@ -9,7 +9,7 @@ import ecuaciones.Polinomio;
 
 /**
  *
- * @author usuario
+ * @author Vanessa
  */
 public class VentanaConfiguracion extends javax.swing.JFrame {
 

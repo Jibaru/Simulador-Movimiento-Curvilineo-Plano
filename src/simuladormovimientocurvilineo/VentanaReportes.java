@@ -18,7 +18,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
- * @author USUARIO1
+ * @author Cgaje
  */
 public class VentanaReportes extends javax.swing.JFrame {
  

@@ -6,7 +6,6 @@
 package simuladormovimientocurvilineo;
 
 import ecuaciones.FuncionVectorial;
-import ecuaciones.Monomio;
 import ecuaciones.Polinomio;
 import java.awt.Color;
 import java.awt.Image;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 
 /**
  *
